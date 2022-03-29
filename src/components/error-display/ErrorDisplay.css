@@ -1,0 +1,24 @@
+.error-display-container {
+  background-color: rgb(243, 11, 11);
+  color: rgba(255, 255, 255, 1);
+  text-align: center;
+  margin: 0;
+  padding-top: 1rem;
+}
+
+.error-display-message-close {
+  cursor: pointer;
+}
+
+.fadeIn {
+  animation: fadeInAnimation 2s linear;
+}
+
+@keyframes fadeInAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,45 @@
+.register-form-container {
+  background-color: rgba(255, 255, 255, 0.781);
+  padding: 2rem;
+  width: 50%;
+}
+
+.register-form-container h2 {
+  font-size: 1.6rem;
+  color: #222;
+}
+
+.register-form-btn {
+  display: block !important;
+  border: none !important;
+  padding: 1rem 1rem !important;
+  color: #fff !important;
+  background-color: rgba(44, 44, 84, 0.685) !important;
+  border-radius: 5px !important;
+  width: 100% !important;
+  font-size: 1.2rem !important;
+}
+
+.register-form-base-links {
+  cursor: pointer;
+  color: rgba(64, 64, 122, 0.76);
+  text-decoration: underline;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.register-form-base-links:hover {
+  color: rgba(64, 64, 122, 1);
+  text-decoration: underline;
+}
+
+.register-form-label {
+  color: #333;
+  font-weight: 400;
+}
+
+@media screen and (max-width: 700px) {
+  .register-form-container {
+    width: 95%;
+  }
+}

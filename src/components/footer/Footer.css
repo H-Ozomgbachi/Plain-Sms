@@ -1,0 +1,10 @@
+.footer-container {
+  background-color: rgba(179, 57, 57, 1);
+  padding: 1rem;
+}
+
+.footer-copyright {
+  color: #fff;
+  display: block;
+  text-align: center;
+}
