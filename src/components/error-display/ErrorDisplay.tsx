@@ -9,7 +9,7 @@ interface Props {
 export default observer(function ErrorDisplay({ visible }: Props) {
   const { commonStore } = useStore();
 
-  return commonStore.isThereError ? (
+  return visible ? (
     <div className="fadeIn">
       <div className="error-display-container row ">
         <p className="error-display-message col-11">{commonStore.error}</p>

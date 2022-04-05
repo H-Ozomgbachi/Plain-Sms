@@ -1,4 +1,3 @@
-import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 import { useField } from "formik";
 import { Form, Label, Select } from "semantic-ui-react";
 import "./css/MyInput.css";
@@ -7,7 +6,7 @@ interface Props {
   placeholder: string;
   name: string;
   options: any;
-  label?: string | ReactJSXElement;
+  label?: string;
   onOpen?: () => void;
   onClose?: () => void;
   required?: boolean;
@@ -18,7 +17,7 @@ export default function MySelectInput(props: Props) {
 
   return (
     <Form.Field error={meta.touched && !!meta.error}>
-      <label> {props.label} </label>
+      <label className="input-text-label"> {props.label} </label>
       <Select
         className="p-1"
         clearable
@@ -42,7 +41,7 @@ export function MyMultipleSelectInput(props: Props) {
 
   return (
     <Form.Field error={meta.touched && !!meta.error}>
-      <label> {props.label} </label>
+      <label className="input-text-label"> {props.label} </label>
       <Select
         clearable
         multiple

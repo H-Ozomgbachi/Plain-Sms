@@ -1,0 +1,47 @@
+.header-container {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 1rem;
+}
+
+.header-logo {
+  font-weight: bold;
+  font-size: 2rem;
+  color: rgb(141, 18, 141);
+  text-decoration: none;
+}
+
+.header-link {
+  margin: 0 1rem;
+  padding: 0 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: #000;
+}
+
+.header-link:hover {
+  color: #000;
+  border-bottom: 2px solid purple;
+}
+
+.header-link-active {
+  border-bottom: 2px solid purple;
+}
+
+.drawer-nav-bar {
+  display: none;
+  font-size: 1.5rem;
+  color: #777;
+}
+
+@media screen and (max-width: 700px) {
+  .header-links-box {
+    display: none;
+  }
+
+  .drawer-nav-bar {
+    display: block;
+  }
+}

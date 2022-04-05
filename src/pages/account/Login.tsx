@@ -3,13 +3,13 @@ import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 import { Button } from "semantic-ui-react";
 import * as Yup from "yup";
-import { useStore } from "../api/main/appStore";
+import { useStore } from "../../api/main/appStore";
 import {
   Authentication,
   AuthenticationError,
-} from "../components/authentication/Authentication";
-import MyTextInput from "../components/inputs/MyTextInput";
-import "./css/Login.css";
+} from "../../components/authentication/Authentication";
+import MyTextInput from "../../components/inputs/MyTextInput";
+import "../page-specific-styles/Login.css";
 
 export default observer(function Login() {
   const { userAccountStore } = useStore();
@@ -45,7 +45,7 @@ export default observer(function Login() {
                 <MyTextInput
                   name="username"
                   placeholder="Enter username"
-                  label={<span className="login-form-label">Username</span>}
+                  label="Username"
                   onFocus={() =>
                     userAccountStore.setAuthenticationErrorMessage(null)
                   }
@@ -54,7 +54,7 @@ export default observer(function Login() {
                   name="password"
                   type="password"
                   placeholder="Enter your password"
-                  label={<span className="login-form-label">Password</span>}
+                  label="Password"
                   onFocus={() =>
                     userAccountStore.setAuthenticationErrorMessage(null)
                   }

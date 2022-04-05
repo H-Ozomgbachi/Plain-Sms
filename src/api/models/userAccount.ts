@@ -3,6 +3,16 @@ export interface LoginDTO {
   password: string;
 }
 
+export interface ResetPasswordDTO {
+  token: string;
+  password: string;
+  confirmPassword: string;
+}
+
+export interface ForgotPasswordDTO {
+  email: string;
+}
+
 export interface RegisterDTO {
   firstName: string;
   lastName: string;
@@ -21,4 +31,9 @@ export interface UserData {
   countryCode: string;
   roles: string[];
   token: string;
+}
+
+export interface CredentialsData {
+  clientSecret: string;
+  clientId: string;
 }

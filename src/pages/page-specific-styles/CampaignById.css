@@ -1,0 +1,21 @@
+.campaign-container {
+  padding: 2rem;
+  background-color: #fff;
+  margin: 3rem auto;
+  width: 70%;
+}
+
+.campaign-detail-item {
+  margin: 2rem 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.campaign-detail-key {
+  font-size: 1.1rem;
+  color: #000;
+}
+
+.campaign-detail-value {
+  font-size: 1rem;
+  color: #555;
+}

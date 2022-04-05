@@ -3,12 +3,12 @@ import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 import { Button } from "semantic-ui-react";
 import * as Yup from "yup";
-import { useStore } from "../api/main/appStore";
-import { Authentication } from "../components/authentication/Authentication";
-import MySelectInput from "../components/inputs/MySelectInput";
-import MyTextInput from "../components/inputs/MyTextInput";
-import { CountryCodeOptions } from "../local-data/CountryCodeOptions";
-import "./css/Register.css";
+import { useStore } from "../../api/main/appStore";
+import { Authentication } from "../../components/authentication/Authentication";
+import MySelectInput from "../../components/inputs/MySelectInput";
+import MyTextInput from "../../components/inputs/MyTextInput";
+import { CountryCodeOptions } from "../../local-data/CountryCodeOptions";
+import "../page-specific-styles/Register.css";
 
 export default observer(function Register() {
   const { userAccountStore } = useStore();
@@ -48,9 +48,7 @@ export default observer(function Register() {
                 <MyTextInput
                   name="firstName"
                   placeholder="Enter first name"
-                  label={
-                    <span className="register-form-label">First Name</span>
-                  }
+                  label="First Name"
                   onFocus={() =>
                     userAccountStore.setAuthenticationErrorMessage(null)
                   }
@@ -58,7 +56,7 @@ export default observer(function Register() {
                 <MyTextInput
                   name="lastName"
                   placeholder="Enter last name"
-                  label={<span className="register-form-label">Last Name</span>}
+                  label="Last Name"
                   onFocus={() =>
                     userAccountStore.setAuthenticationErrorMessage(null)
                   }
@@ -67,7 +65,7 @@ export default observer(function Register() {
                 <MyTextInput
                   name="email"
                   placeholder="Enter your email"
-                  label={<span className="register-form-label">Email</span>}
+                  label="Email"
                   onFocus={() =>
                     userAccountStore.setAuthenticationErrorMessage(null)
                   }
@@ -76,14 +74,14 @@ export default observer(function Register() {
                 <MyTextInput
                   name="password"
                   placeholder="Enter your password"
-                  label={<span className="register-form-label">Password</span>}
+                  label="Password"
                   onFocus={() =>
                     userAccountStore.setAuthenticationErrorMessage(null)
                   }
                 />
 
                 <>
-                  <span className="register-form-label">Telephone</span>
+                  <span className="input-text-label">Telephone</span>
                   <div className="d-flex mb-2">
                     <div className="">
                       <MySelectInput

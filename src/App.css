@@ -5,3 +5,7 @@
 .content-wrap {
   flex: 1;
 }
+
+.pointer-cursor {
+  cursor: pointer;
+}

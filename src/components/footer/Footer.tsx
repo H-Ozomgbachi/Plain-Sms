@@ -5,9 +5,7 @@ export default function Footer() {
 
   return (
     <div className="footer-container">
-      <span className="footer-copyright">
-        &copy; {currentYear} Busy Brain Automotive Services
-      </span>
+      <span className="footer-copyright">&copy; {currentYear} Plain Sms</span>
     </div>
   );
 }

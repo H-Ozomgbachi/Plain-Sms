@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { customHistory } from "..";
 
 export default function Home() {
@@ -9,6 +10,10 @@ export default function Home() {
       >
         Login Page
       </button>
+
+      <Link to={`/account/reset-password`}>Reset</Link>
+      <br />
+      <Link to={`/account`}>Profile</Link>
     </div>
   );
 }

@@ -31,6 +31,7 @@ axios.interceptors.response.use(
         break;
       case 401:
         store.userAccountStore.setAuthenticationErrorMessage(data.title);
+        store.commonStore.setLastVisitedPathname(window.location.pathname);
         customHistory.push("/account/login");
         break;
       case 400:
@@ -49,7 +50,8 @@ const requests = {
   get: <T>(url: string) => axios.get<T>(url).then(responseBody),
   post: <T>(url: string, body?: {}) =>
     axios.post<T>(url, body).then(responseBody),
-  put: <T>(url: string, body: {}) => axios.put<T>(url, body).then(responseBody),
+  put: <T>(url: string, body?: {}) =>
+    axios.put<T>(url, body).then(responseBody),
   patch: <T>(url: string, body?: {}) =>
     axios.patch<T>(url, body).then(responseBody),
   del: <T>(url: string) => axios.delete<T>(url).then(responseBody),

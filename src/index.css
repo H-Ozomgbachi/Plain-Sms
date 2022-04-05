@@ -15,3 +15,27 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+.fadeIn {
+  animation: fadeInAnimation 2s linear;
+}
+
+.default-page-bg {
+  background-color: rgba(64, 64, 122, 0.2);
+  min-height: 100vh;
+}
+
+@media screen and (max-width: 700px) {
+  html {
+    font-size: 70%;
+  }
+}
+
+@keyframes fadeInAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
