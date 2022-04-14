@@ -12,12 +12,12 @@
 .slide-menu-in {
   transform: translateX(0);
   width: 100%;
-  transition: all 1s ease-in-out;
+  transition: all 600ms ease-in-out;
 }
 
-.slide-menu-out {
+/* .slide-menu-out {
   transition: all 500ms linear;
-}
+} */
 
 .hamburger-menu-close {
   align-self: flex-end;
@@ -35,9 +35,9 @@
   border-bottom: 1px solid #eee;
   text-decoration: none;
   text-align: center;
-  color: #666;
+  color: #444;
 }
 .hamburger-menu-links > a:hover {
-  background-color: rgba(185, 75, 185, 0.829);
+  background-color: rgba(0, 0, 0, 0.226);
   color: #fff;
 }

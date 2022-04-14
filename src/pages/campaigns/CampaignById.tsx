@@ -54,7 +54,8 @@ export default observer(function CampaignById() {
 
             <Button
               content="Edit Campaign"
-              primary
+              color="vk"
+              icon="edit"
               onClick={() => setIsEditing(true)}
             />
           </div>

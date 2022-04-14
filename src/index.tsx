@@ -11,11 +11,11 @@ import { store, StoreContext } from "./api/main/appStore";
 export const customHistory = createBrowserHistory();
 
 ReactDOM.render(
-  <StoreContext.Provider value={store}>
-    <BrowserRouter history={customHistory}>
+  <BrowserRouter history={customHistory}>
+    <StoreContext.Provider value={store}>
       <App />
-    </BrowserRouter>
-  </StoreContext.Provider>,
+    </StoreContext.Provider>
+  </BrowserRouter>,
   document.getElementById("root")
 );
 

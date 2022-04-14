@@ -3,6 +3,7 @@ import { observer } from "mobx-react-lite";
 import { Button } from "semantic-ui-react";
 import * as Yup from "yup";
 import { UserData } from "../../api/models/userAccount";
+import CustomDefaultTabHeading from "../headings/CustomDefaultTabHeading";
 import MyTextInput from "../inputs/MyTextInput";
 import "./UserProfile.css";
 
@@ -14,9 +15,7 @@ export default observer(function UserProfile({ user }: Props) {
   if (user === null) return <></>;
   return (
     <div>
-      <div className="user-profile-header">
-        <h2 className="user-profile-header-title"> My account</h2>
-      </div>
+      <CustomDefaultTabHeading content="My account" />
 
       <div className="user-profile-data">
         <Formik

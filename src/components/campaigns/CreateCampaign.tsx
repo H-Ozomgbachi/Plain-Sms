@@ -1,13 +1,12 @@
 import { observer } from "mobx-react-lite";
 import "./CreateCampaign.css";
 import CreateCampaignForm from "../forms/campaign-form/CreateCampaignForm";
+import CustomDefaultTabHeading from "../headings/CustomDefaultTabHeading";
 
 export default observer(function CreateCampaign() {
   return (
     <div>
-      <div className="user-profile-header">
-        <h2 className="user-profile-header-title"> New SMS Campaign</h2>
-      </div>
+      <CustomDefaultTabHeading content="New SMS Campaign" />
 
       <div className="user-profile-data">
         <CreateCampaignForm />

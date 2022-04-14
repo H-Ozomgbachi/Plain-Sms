@@ -41,16 +41,11 @@ export class UserAccountStore {
       store.commonStore.setToken(result.token);
       store.commonStore.setId(result.id);
 
-      const { result: creds } = await this.getCredentials(result.id);
-
       runInAction(() => {
         this.user = result;
-        this.credentials = creds;
       });
 
-      store.commonStore.lastVisitedPathname
-        ? customHistory.push(store.commonStore.lastVisitedPathname)
-        : customHistory.push("/account");
+      store.commonStore.redirectDecision();
     } catch (error) {
       throw error;
     }
@@ -79,6 +74,8 @@ export class UserAccountStore {
         this.user = result;
         this.credentials = creds;
       });
+
+      store.commonStore.redirectDecision();
     } catch (error) {
       throw error;
     } finally {
@@ -126,6 +123,16 @@ export class UserAccountStore {
     } catch (error) {
       throw error;
     }
+  };
+
+  logout = () => {
+    store.commonStore.setLastVisitedPathname(null);
+    this.user = null;
+
+    store.commonStore.setToken(null);
+    store.commonStore.setId(null);
+
+    customHistory.push("/account/login");
   };
 
   resetCredentials = async (id: string) => {

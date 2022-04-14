@@ -60,9 +60,10 @@ export default observer(function CreateCampaignForm({
 
             <Button
               loading={isSubmitting}
-              content="Submit"
+              content={currentData ? "Update Campaign" : "Create New Campaign"}
+              icon="pencil"
+              color="vk"
               type="submit"
-              primary
             />
             {currentData && <Button content="Cancel" onClick={closeEdit} />}
           </Form>

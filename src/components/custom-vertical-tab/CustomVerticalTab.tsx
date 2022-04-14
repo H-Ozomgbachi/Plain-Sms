@@ -5,6 +5,7 @@ import "./CustomVerticalTab.css";
 interface Tab {
   icon: ReactJSXElement;
   text: string;
+  callbackFn?: () => void;
 }
 
 interface Props {
@@ -25,7 +26,9 @@ export default function CustomVerticalTab({ tabs, panels }: Props) {
                 index === bodyIndex ? "vertical-tab-left_item-active" : ""
               }`}
               key={index}
-              onClick={() => setBodyIndex(index)}
+              onClick={
+                el.callbackFn ? el.callbackFn : () => setBodyIndex(index)
+              }
             >
               <span className="vertical-tab-left_item-icon">{el.icon}</span>
               <span className="vertical-tab-left_item-text">{el.text}</span>

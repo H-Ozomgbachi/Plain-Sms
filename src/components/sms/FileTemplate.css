@@ -1,0 +1,9 @@
+.file-template-heading {
+  font-weight: bold;
+  font-size: 1.3rem;
+  text-decoration: underline;
+}
+
+.file-template-detail {
+  font-size: 1.1rem;
+}

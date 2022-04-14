@@ -1,16 +1,26 @@
 .header-container {
-  background-color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 2px 1rem;
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
 }
 
-.header-logo {
-  font-weight: bold;
-  font-size: 2rem;
-  color: rgb(141, 18, 141);
+.logo-container {
   text-decoration: none;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2c3e50;
+  padding: 0.5rem 0;
+}
+
+.logo-container:hover {
+  color: #2c3e50;
+}
+
+.logo-img {
+  width: 4rem;
 }
 
 .header-link {

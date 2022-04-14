@@ -32,8 +32,9 @@ export default observer(function Header() {
   const { commonStore } = useStore();
   return (
     <div className="header-container ">
-      <Link to={"/"} className="header-logo">
-        [Logo] Sms
+      <Link to={"/"} className="logo-container">
+        <img alt="Log" src="/sms-logo.jpg" className="logo-img" />{" "}
+        <span className="logo-text">Plain Sms</span>
       </Link>
       <div className="header-links-box">
         {data.map((el, index) => (

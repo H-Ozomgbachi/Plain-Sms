@@ -11,7 +11,7 @@ const data = [
   { to: "/", text: "Home" },
   { to: "/campaigns", text: "Campaign" },
   { to: "/sms", text: "Sms" },
-  { to: "/report", text: "Report" },
+  { to: "/reports", text: "Reports" },
   { to: "/account", text: "Account" },
 ];
 

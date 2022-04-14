@@ -12,7 +12,7 @@ interface Props {
   onFocus?: () => void;
 }
 
-export function MyTextTexArea(props: Props) {
+export function MyTextArea(props: Props) {
   const [field, meta] = useField(props.name);
 
   return (

@@ -1,0 +1,10 @@
+.create-sms-container {
+  padding: 1.2rem;
+}
+
+.recipient-download-link {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 1rem auto;
+  font-size: 1.1rem;
+}

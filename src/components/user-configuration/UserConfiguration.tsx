@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { useStore } from "../../api/main/appStore";
+import CustomDefaultTabHeading from "../headings/CustomDefaultTabHeading";
 import "./UserConfiguration.css";
 
 export default observer(function UserConfiguration() {
@@ -16,9 +17,7 @@ export default observer(function UserConfiguration() {
 
   return (
     <div>
-      <div className="user-profile-header">
-        <h2 className="user-profile-header-title">Configuration</h2>
-      </div>
+      <CustomDefaultTabHeading content="Configuration" />
     </div>
   );
 });

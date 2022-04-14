@@ -7,9 +7,17 @@ import "../page-specific-styles/MyAccount.css";
 import UserConfiguration from "../../components/user-configuration/UserConfiguration";
 import { useStore } from "../../api/main/appStore";
 import Header from "../../components/header/Header";
+import { useEffect } from "react";
+import { customHistory } from "../..";
 
 export default observer(function MyAccount() {
   const { userAccountStore } = useStore();
+
+  useEffect(() => {
+    if (userAccountStore.user === null) {
+      customHistory.push("/account/login");
+    }
+  }, [userAccountStore.user]);
 
   return (
     <>
@@ -17,8 +25,13 @@ export default observer(function MyAccount() {
       <CustomVerticalTab
         tabs={[
           { icon: <Icon name="user" />, text: "Profile" },
-          { icon: <Icon name="certificate" />, text: "Credentials" },
+          { icon: <Icon name="certificate" />, text: "API Credentials" },
           { icon: <Icon name="configure" />, text: "Configuration" },
+          {
+            icon: <Icon name="sign-out" />,
+            text: "Log out",
+            callbackFn: userAccountStore.logout,
+          },
         ]}
         panels={[
           <UserProfile user={userAccountStore.user} />,

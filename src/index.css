@@ -25,9 +25,41 @@ body {
   min-height: 100vh;
 }
 
+.custom-default-tab-header {
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  padding: 1rem 0;
+}
+
+.custom-default-tab-header-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: capitalize;
+  color: #666;
+}
+
+.official-download-btn {
+  display: inline-block;
+  width: fit-content;
+  text-decoration: none;
+  border: 2.5px solid orange;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+  background-color: #333;
+  color: orange;
+}
+
+.official-download-btn:hover {
+  color: orangered;
+  background-color: #fff;
+}
+
 @media screen and (max-width: 700px) {
   html {
     font-size: 70%;
+    font-weight: 600;
   }
 }
 

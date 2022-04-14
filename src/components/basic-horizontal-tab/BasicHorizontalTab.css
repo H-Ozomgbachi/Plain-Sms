@@ -1,0 +1,26 @@
+.tab-key {
+  display: flex;
+}
+
+.tab-key_item {
+  width: 50%;
+  background-color: #fff;
+  padding: 5px;
+  text-align: center;
+  font-size: 1rem;
+  border-bottom: 1px solid #eef;
+
+  cursor: pointer;
+}
+
+.tab-key_item:last-child {
+  border-right: 1px solid #eef;
+}
+
+.tab-key_item:first-child {
+  border-left: 1px solid #eef;
+}
+
+.tab-key_item-active {
+  background-color: #eee;
+}

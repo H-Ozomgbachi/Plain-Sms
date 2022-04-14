@@ -1,8 +1,9 @@
 import { makeAutoObservable, reaction } from "mobx";
+import { customHistory } from "../..";
 
 export class CommonStore {
-  id: string | null = window.localStorage.getItem("id");
-  token: string | null = window.localStorage.getItem("jwt");
+  id: string | null = window.localStorage.getItem("id-plainsms");
+  token: string | null = window.localStorage.getItem("jwt-plainsms");
   error: string | null = null;
   success: string | null = null;
   loading = false;
@@ -10,6 +11,9 @@ export class CommonStore {
   isThereError = false;
   isThereSuccess = false;
   lastVisitedPathname: string | null = null;
+  onreloadPath: string | null = window.localStorage.getItem(
+    "reload-path-plainsms"
+  );
 
   constructor() {
     makeAutoObservable(this);
@@ -18,9 +22,9 @@ export class CommonStore {
       () => this.token,
       (token) => {
         if (token) {
-          window.localStorage.setItem("jwt", token);
+          window.localStorage.setItem("jwt-plainsms", token);
         } else {
-          window.localStorage.removeItem("jwt");
+          window.localStorage.removeItem("jwt-plainsms");
         }
       }
     );
@@ -29,9 +33,20 @@ export class CommonStore {
       () => this.id,
       (id) => {
         if (id) {
-          window.localStorage.setItem("id", id);
+          window.localStorage.setItem("id-plainsms", id);
         } else {
-          window.localStorage.removeItem("id");
+          window.localStorage.removeItem("id-plainsms");
+        }
+      }
+    );
+
+    reaction(
+      () => this.onreloadPath,
+      (onreloadPath) => {
+        if (onreloadPath) {
+          window.localStorage.setItem("reload-path-plainsms", onreloadPath);
+        } else {
+          window.localStorage.removeItem("reload-path-plainsms");
         }
       }
     );
@@ -75,7 +90,31 @@ export class CommonStore {
     this.id = id;
   };
 
+  setOnreloadPath = (path: string | null) => {
+    this.onreloadPath = path;
+  };
+
   setLastVisitedPathname = (pathname: string | null) => {
     this.lastVisitedPathname = pathname;
+  };
+
+  redirectDecision = () => {
+    let linkToDirect;
+
+    if (
+      this.lastVisitedPathname !== null &&
+      this.lastVisitedPathname !== "/account/login"
+    ) {
+      linkToDirect = this.lastVisitedPathname;
+    } else if (
+      this.onreloadPath !== null &&
+      this.onreloadPath !== "/account/login"
+    ) {
+      linkToDirect = this.onreloadPath;
+    } else {
+      linkToDirect = "/account";
+    }
+
+    customHistory.push(linkToDirect);
   };
 }

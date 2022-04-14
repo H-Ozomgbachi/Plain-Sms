@@ -5,6 +5,7 @@ import { Button } from "semantic-ui-react";
 import { CredentialsData } from "../../api/models/userAccount";
 import MyTextInput from "../inputs/MyTextInput";
 import { useStore } from "../../api/main/appStore";
+import CustomDefaultTabHeading from "../headings/CustomDefaultTabHeading";
 
 interface Props {
   creds: CredentialsData | null;
@@ -15,9 +16,7 @@ export default observer(function UserCredentials({ creds }: Props) {
 
   return (
     <div>
-      <div className="user-profile-header">
-        <h2 className="user-profile-header-title">My Credentials</h2>
-      </div>
+      <CustomDefaultTabHeading content="Api Credentials" />
 
       <div className="user-profile-data">
         <Formik
@@ -54,7 +53,8 @@ export default observer(function UserCredentials({ creds }: Props) {
                   type="submit"
                   className=""
                   size="tiny"
-                  primary
+                  color="vk"
+                  icon="edit"
                 />
                 <Button
                   type="button"

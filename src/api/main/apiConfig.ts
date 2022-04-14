@@ -3,7 +3,7 @@ import { customHistory } from "../..";
 import { store } from "./appStore";
 import { sleep } from "./coreMethods";
 
-export const apiUrl = "http://plainsms-api.azurewebsites.net/api/v1";
+export const apiUrl = "https://plainsms-api.azurewebsites.net/api/v1";
 
 axios.defaults.baseURL = apiUrl;
 
