@@ -25,3 +25,6 @@ export interface DefaultData {
 export interface RedirectTo {
   to: string;
 }
+export interface IsUpdated {
+  isUpdated: boolean;
+}

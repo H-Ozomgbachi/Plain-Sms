@@ -7,9 +7,10 @@ interface Props {
   name: string;
   type?: string;
   label?: string;
-  value?: string;
+  value?: any;
   disabled?: boolean;
   onFocus?: () => void;
+  checked?: boolean;
 }
 
 export function MyTextArea(props: Props) {
@@ -32,7 +33,13 @@ export default function MyTextInput(props: Props) {
   return (
     <Form.Field error={meta.touched && !!meta.error}>
       <label className="input-text-label"> {props.label} </label>
-      <input {...field} {...props} autoComplete="off" onFocus={props.onFocus} />
+      <input
+        {...field}
+        {...props}
+        autoComplete="off"
+        onFocus={props.onFocus}
+        checked={props.checked}
+      />
       {meta.touched && meta.error ? (
         <span className="error-label">* {meta.error}</span>
       ) : null}

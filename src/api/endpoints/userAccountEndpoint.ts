@@ -1,7 +1,9 @@
 import requests from "../main/apiConfig";
-import { ApiResponseData, DefaultData } from "../models/shared";
+import { ApiResponseData, DefaultData, IsUpdated } from "../models/shared";
 import {
+  ConfigurationData,
   CredentialsData,
+  EditConfigurationDTO,
   ForgotPasswordDTO,
   LoginDTO,
   RegisterDTO,
@@ -29,7 +31,15 @@ export const UserAccount = {
     requests.post("/account/reset-password", payload),
 
   getConfiguration: (id: string) =>
-    requests.get<any>(`/account/${id}/configuration`),
+    requests.get<ApiResponseData<ConfigurationData>>(
+      `/account/${id}/configuration`
+    ),
+
+  editConfiguration: (id: string, payload: EditConfigurationDTO) =>
+    requests.put<ApiResponseData<IsUpdated>>(
+      `/account/${id}/configuration`,
+      payload
+    ),
 
   getCredentials: (id: string) =>
     requests.get<ApiResponseData<CredentialsData>>(

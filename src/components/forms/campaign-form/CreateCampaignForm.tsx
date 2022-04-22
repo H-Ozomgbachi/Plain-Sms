@@ -42,7 +42,6 @@ export default observer(function CreateCampaignForm({
         }
         validationSchema={Yup.object({
           name: Yup.string().required("This field is required"),
-          callbackUrl: Yup.string().required("This field is required"),
         })}
       >
         {({ handleSubmit, isSubmitting, isValid, dirty }) => (

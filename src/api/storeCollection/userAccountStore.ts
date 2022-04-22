@@ -3,7 +3,9 @@ import { customHistory } from "../..";
 import agent from "../main/apiAgent";
 import { store } from "../main/appStore";
 import {
+  ConfigurationData,
   CredentialsData,
+  EditConfigurationDTO,
   ForgotPasswordDTO,
   LoginDTO,
   RegisterDTO,
@@ -15,7 +17,7 @@ export class UserAccountStore {
   authenticationErrorMessage: string | null = "";
   user: UserData | null = null;
   credentials: CredentialsData | null = null;
-  configuration: any | null = null;
+  configuration: ConfigurationData | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -37,7 +39,6 @@ export class UserAccountStore {
   login = async (values: LoginDTO) => {
     try {
       const { result } = await agent.UserAccount.login(values);
-
       store.commonStore.setToken(result.token);
       store.commonStore.setId(result.id);
 
@@ -68,11 +69,11 @@ export class UserAccountStore {
     try {
       store.commonStore.setLoading(true);
       const { result } = await agent.UserAccount.myAccount(id);
-      const { result: creds } = await this.getCredentials(result.id);
+      await this.getCredentials(result.id);
+      await this.getConfiguration(result.id);
 
       runInAction(() => {
         this.user = result;
-        this.credentials = creds;
       });
 
       store.commonStore.redirectDecision();
@@ -108,18 +109,47 @@ export class UserAccountStore {
 
   getConfiguration = async (id: string) => {
     try {
-      const data = await agent.UserAccount.getConfiguration(id);
+      const { result } = await agent.UserAccount.getConfiguration(id);
       runInAction(() => {
-        this.configuration = data;
+        this.configuration = result;
       });
     } catch (error) {
       throw error;
     }
   };
 
+  editConfiguration = async (values: ConfigurationData) => {
+    try {
+      store.commonStore.setLoading(true);
+      window.scrollTo(0, 0);
+      const payload: EditConfigurationDTO = {
+        otpLength: values.otpLength,
+        otpIsAlphaNumeric: values.otpIsAlphaNumeric,
+        otpMessageTemplate: values.otpMessageTemplate,
+        userId: values.userId,
+      };
+
+      const { statusCode } = await agent.UserAccount.editConfiguration(
+        payload.userId,
+        payload
+      );
+
+      if (statusCode === 200)
+        store.commonStore.setSuccess("Configuration updated successfully!");
+    } catch (error) {
+      throw error;
+    } finally {
+      this.myAccount(values.userId);
+      store.commonStore.setLoading(false);
+    }
+  };
+
   getCredentials = async (id: string) => {
     try {
-      return await agent.UserAccount.getCredentials(id);
+      const { result } = await agent.UserAccount.getCredentials(id);
+      runInAction(() => {
+        this.credentials = result;
+      });
     } catch (error) {
       throw error;
     }
@@ -145,10 +175,7 @@ export class UserAccountStore {
         store.commonStore.setSuccess("Credentials successfully updated");
       }
 
-      const { result: creds } = await this.getCredentials(id);
-      runInAction(() => {
-        this.credentials = creds;
-      });
+      await this.getCredentials(id);
     } catch (error) {
       throw error;
     } finally {

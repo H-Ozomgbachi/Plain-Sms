@@ -1,5 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
+import { Icon } from "semantic-ui-react";
 import { useStore } from "../../api/main/appStore";
 import "./HamburgerMenu.css";
 
@@ -13,6 +14,7 @@ const data = [
   { to: "/sms", text: "Sms" },
   { to: "/reports", text: "Reports" },
   { to: "/account", text: "Account" },
+  { to: "/payments", text: "Payments" },
 ];
 
 export default observer(function HamburgerMenu({ visible }: Props) {
@@ -32,7 +34,7 @@ export default observer(function HamburgerMenu({ visible }: Props) {
         className="hamburger-menu-close"
         onClick={() => commonStore.setDrawerVisible(false)}
       >
-        X
+        <Icon name="times" />
       </div>
       <div className="hamburger-menu-links">
         {data.map((el) => (

@@ -37,3 +37,23 @@ export interface CredentialsData {
   clientSecret: string;
   clientId: string;
 }
+
+export interface ConfigurationData {
+  userId: string;
+  countryCode: string;
+  smsUnitPrice: number;
+  smsIntlUnitPrice: number;
+  whatsappUnitPrice: number;
+  otpUnitPrice: number;
+  otpIntlUnitPrice: number;
+  otpLength: number;
+  otpIsAlphaNumeric: boolean;
+  otpMessageTemplate: string;
+}
+
+export interface EditConfigurationDTO {
+  otpLength: number;
+  otpIsAlphaNumeric: boolean;
+  otpMessageTemplate: string;
+  userId: string;
+}

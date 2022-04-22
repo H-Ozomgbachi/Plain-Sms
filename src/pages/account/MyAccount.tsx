@@ -36,7 +36,7 @@ export default observer(function MyAccount() {
         panels={[
           <UserProfile user={userAccountStore.user} />,
           <UserCredentials creds={userAccountStore.credentials} />,
-          <UserConfiguration />,
+          <UserConfiguration config={userAccountStore.configuration} />,
         ]}
       />
     </>

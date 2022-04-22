@@ -68,9 +68,10 @@ export default observer(function UserProfile({ user }: Props) {
 
               <Button
                 loading={isSubmitting}
-                content="Edit Profile"
+                content="Save Profile"
                 type="submit"
-                className="register-form-btn"
+                color="vk"
+                icon="edit"
               />
             </Form>
           )}
