@@ -10,12 +10,12 @@ export interface PagedResult<T> {
 }
 
 export interface QueryParam {
-  PageNumber: number;
-  Code: string;
-  RecipientNumber: string;
-  StartDate: Date;
-  EndDate: Date;
-  PageSize: number;
+  pageNumber?: number;
+  code?: string;
+  recipientNumber?: string;
+  startDate: string;
+  endDate: string;
+  pageSize: number;
 }
 
 export interface DefaultData {

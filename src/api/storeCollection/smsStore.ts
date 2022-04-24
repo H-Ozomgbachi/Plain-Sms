@@ -12,8 +12,11 @@ export class SmsStore {
     try {
       store.commonStore.setLoading(true);
       window.scrollTo(0, 0);
-      const { campaignId, ...payload } = values;
-      const { result } = await agent.Sms.sendSms(campaignId!, payload);
+      const { statusCode } = await agent.Sms.sendSms(values.campaignId, values);
+
+      if (statusCode) {
+        store.commonStore.setSuccess("Successful");
+      }
     } catch (error) {
       throw error;
     } finally {

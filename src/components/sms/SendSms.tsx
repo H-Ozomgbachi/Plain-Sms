@@ -10,10 +10,12 @@ export default observer(function SendSms() {
   const { campaignStore, commonStore } = useStore();
 
   useEffect(() => {
-    (async function getCampaigns() {
-      commonStore.setLoading(true);
-      await campaignStore.getAllCampaigns();
-    })().finally(() => commonStore.setLoading(false));
+    if (!campaignStore.campaigns.length) {
+      (async function getCampaigns() {
+        commonStore.setLoading(true);
+        await campaignStore.getAllCampaigns();
+      })().finally(() => commonStore.setLoading(false));
+    }
   }, [campaignStore, commonStore]);
 
   return (

@@ -1,0 +1,26 @@
+.text-input {
+  padding: 0.4rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  font-weight: 500;
+  width: 100%;
+  background-color: transparent;
+}
+
+.text-input:focus {
+  outline: none;
+}
+
+.input-label {
+  display: block;
+  font-size: 1rem;
+}
+
+.input-error {
+  border: 1px solid red;
+}
+
+.input-text-error {
+  color: red;
+  font-size: 0.85rem;
+}

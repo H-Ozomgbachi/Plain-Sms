@@ -28,7 +28,7 @@ export default observer(function CreateSmsOne({ campaigns }: Props) {
     sender: "",
     schduleDateUTC: "",
     priority: 0,
-    campaignId: 0,
+    campaignId: "",
   };
 
   const readUploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,15 +52,18 @@ export default observer(function CreateSmsOne({ campaigns }: Props) {
       <Formik
         initialValues={INITIAL_VALUES}
         onSubmit={async (values, { setErrors, resetForm }) =>
-          smsStore.sendOneMessageToMany({
-            ...values,
-            priority: +values.priority,
-            recipients: processRecipientsArray(uploadedRecipients),
-          })
+          smsStore
+            .sendOneMessageToMany({
+              ...values,
+              priority: +values.priority,
+              recipients: processRecipientsArray(uploadedRecipients),
+            })
+            .finally(() => resetForm({ values: INITIAL_VALUES }))
         }
         validationSchema={Yup.object({
           message: Yup.string().required("This field is required"),
           sender: Yup.string().required("This field is required"),
+          campaignId: Yup.string().required("please select a campaign"),
         })}
       >
         {({ handleSubmit, isSubmitting, isValid, dirty, values }) => (

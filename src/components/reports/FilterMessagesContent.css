@@ -1,0 +1,26 @@
+.filtered-msg-container {
+  margin-top: 1.5rem;
+}
+
+.filtered-campaign-name {
+  color: #555;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.filtered-msg-key {
+  color: rgb(49, 49, 75);
+  font-weight: 600;
+  font-variant: small-caps;
+  font-size: 1.2rem;
+}
+
+.filtered-msg-value {
+  color: #777;
+}
+
+.filtered-msg-card {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}

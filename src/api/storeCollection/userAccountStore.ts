@@ -174,8 +174,6 @@ export class UserAccountStore {
         this.getCredentials(id);
         store.commonStore.setSuccess("Credentials successfully updated");
       }
-
-      await this.getCredentials(id);
     } catch (error) {
       throw error;
     } finally {

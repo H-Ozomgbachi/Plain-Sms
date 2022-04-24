@@ -1,0 +1,25 @@
+.filter-form-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.filter {
+  margin-top: 1rem;
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.filter-form-btn {
+  margin-top: 0.5rem !important;
+}
+
+@media screen and (max-width: 700px) {
+  .filter-form-container {
+    display: block;
+  }
+
+  .filter-form-container div {
+    width: 100%;
+  }
+}
