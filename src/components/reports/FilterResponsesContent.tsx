@@ -5,29 +5,29 @@ import { DateOnlyFormat } from "../../function-library/helper-functions/sharedHe
 import MyPagination from "../pagination/MyPagination";
 import "./FilterMessagesContent.css";
 
-export default observer(function FilterMessagesContent() {
+export default observer(function FilterResponsesContent() {
   const { reportsStore, campaignStore } = useStore();
 
-  useEffect(() => {}, [reportsStore.messagesReport, reportsStore]);
+  useEffect(() => {}, [reportsStore.responsesReport, reportsStore]);
 
   const handlePageChange = (index: number) => {
     if (
-      reportsStore.messagesReport.length !== 0 &&
+      reportsStore.responsesReport.length !== 0 &&
       reportsStore.currentQueryParams
     ) {
-      const id = reportsStore.messagesReport[0].campaignId;
+      const id = reportsStore.responsesReport[0].campaignId;
       const query = {
         ...reportsStore.currentQueryParams,
         pageNumber: index,
       };
-      reportsStore.getSmsMessages(id, query);
+      reportsStore.getSmsMessageResponses(id, query);
     }
   };
 
-  if (reportsStore.messagesReport.length === 0) return <></>;
+  if (reportsStore.responsesReport.length === 0) return <></>;
 
   const campaignName = campaignStore.campaigns.find(
-    (c) => c.uniqueId === reportsStore.messagesReport[0].campaignId
+    (c) => c.uniqueId === reportsStore.responsesReport[0].campaignId
   )?.name;
 
   return (
@@ -35,23 +35,15 @@ export default observer(function FilterMessagesContent() {
       <div className={`filtered-msg-container`}>
         <h4 className="filtered-campaign-name">{campaignName}</h4>
 
-        {reportsStore.messagesReport.map((el) => (
+        {reportsStore.responsesReport.map((el) => (
           <div key={el.id} className="shadow-card p-3 my-2">
-            <div className="row pb-2">
-              <div className="col-4 filtered-msg-key">Sender :</div>
-              <div className="col-8 filtered-msg-value">{el.sender}</div>
-            </div>
-            <div className="row pb-2">
-              <div className="col-4 filtered-msg-key">Message</div>
-              <div className="col-8 filtered-msg-value">{el.text}</div>
-            </div>
             <div className="row pb-2">
               <div className="col-4 filtered-msg-key">Recipient</div>
               <div className="col-8 filtered-msg-value">{el.recipient}</div>
             </div>
             <div className="row pb-2">
-              <div className="col-4 filtered-msg-key">Type</div>
-              <div className="col-8 filtered-msg-value">{el.messageType}</div>
+              <div className="col-4 filtered-msg-key">Response</div>
+              <div className="col-8 filtered-msg-value">{el.response}</div>
             </div>
             <div className="row">
               <div className="col-4 filtered-msg-key">Date</div>
@@ -66,7 +58,7 @@ export default observer(function FilterMessagesContent() {
       <br />
       <MyPagination
         handlePageChange={(index) => handlePageChange(index)}
-        totalPages={reportsStore.totalMsgPages}
+        totalPages={reportsStore.totalResponsePages}
       />
     </>
   );

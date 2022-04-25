@@ -1,6 +1,7 @@
 import { createContext, useContext } from "react";
 import { CampaignStore } from "../storeCollection/campaignStore";
 import { CommonStore } from "../storeCollection/commonStore";
+import { PaymentStore } from "../storeCollection/paymentStore";
 import { ReportsStore } from "../storeCollection/reportsStore";
 import { SmsStore } from "../storeCollection/smsStore";
 import { UserAccountStore } from "../storeCollection/userAccountStore";
@@ -11,6 +12,7 @@ interface Store {
   campaignStore: CampaignStore;
   reportsStore: ReportsStore;
   smsStore: SmsStore;
+  paymentStore: PaymentStore;
 }
 
 export const store: Store = {
@@ -19,6 +21,7 @@ export const store: Store = {
   campaignStore: new CampaignStore(),
   reportsStore: new ReportsStore(),
   smsStore: new SmsStore(),
+  paymentStore: new PaymentStore(),
 };
 
 export const StoreContext = createContext(store);

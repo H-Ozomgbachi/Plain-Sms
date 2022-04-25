@@ -13,3 +13,11 @@ export interface MessageReport {
   text: string;
   responseCode: string;
 }
+
+export interface ResponseReport {
+  id: number;
+  response: string;
+  campaignId: string;
+  recipient: string;
+  createdOnUtc: string;
+}

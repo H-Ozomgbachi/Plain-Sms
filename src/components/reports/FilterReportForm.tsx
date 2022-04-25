@@ -2,18 +2,20 @@ import { Form, Formik } from "formik";
 import { observer } from "mobx-react-lite";
 import { Button } from "semantic-ui-react";
 import * as Yup from "yup";
-import { useStore } from "../../api/main/appStore";
 import { CampaignData } from "../../api/models/campaign";
+import { QueryParam } from "../../api/models/shared";
 import { CustomSelect, CustomTextInput } from "../forms/custom/CustomInputs";
-import "./FilterMessagesForm.css";
+import "./FilterReportForm.css";
 
 interface Props {
   campaigns: CampaignData[];
+  handleSubmit: (id: string, query: QueryParam) => void;
 }
 
-export default observer(function FilterMessagesForm({ campaigns }: Props) {
-  const { reportsStore } = useStore();
-
+export default observer(function FilterReportForm({
+  campaigns,
+  handleSubmit,
+}: Props) {
   return (
     <div className="filter">
       <Formik
@@ -26,9 +28,7 @@ export default observer(function FilterMessagesForm({ campaigns }: Props) {
           endDate: "",
           pageSize: 10,
         }}
-        onSubmit={(values, { resetForm }) =>
-          reportsStore.getSmsMessages(values.id, values)
-        }
+        onSubmit={(values, { resetForm }) => handleSubmit(values.id, values)}
         validationSchema={Yup.object({
           id: Yup.string().required("This field is required"),
           startDate: Yup.string().required("This field is required"),
