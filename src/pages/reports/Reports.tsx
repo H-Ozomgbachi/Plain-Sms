@@ -5,6 +5,7 @@ import { useStore } from "../../api/main/appStore";
 import CustomVerticalTab from "../../components/custom-vertical-tab/CustomVerticalTab";
 import Header from "../../components/header/Header";
 import MessagesReport from "../../components/reports/MessagesReport";
+import OtpsReport from "../../components/reports/OtpsReport";
 import ResponsesReport from "../../components/reports/ResponsesReport";
 
 export default observer(function Reports() {
@@ -31,7 +32,7 @@ export default observer(function Reports() {
         panels={[
           <MessagesReport campaigns={campaignStore.campaigns} />,
           <ResponsesReport campaigns={campaignStore.campaigns} />,
-          <></>,
+          <OtpsReport />,
         ]}
       />
     </>

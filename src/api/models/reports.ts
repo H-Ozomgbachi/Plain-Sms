@@ -21,3 +21,14 @@ export interface ResponseReport {
   recipient: string;
   createdOnUtc: string;
 }
+
+export interface OtpReport {
+  id: number;
+  recipient: string;
+  expiresOnUtc: string;
+  createdOnUtc: string;
+  uniqueId: string;
+  sent: number;
+  isVerified: boolean;
+  code: string;
+}

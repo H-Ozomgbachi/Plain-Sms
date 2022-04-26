@@ -5,15 +5,17 @@ import {
 } from "../../function-library/helper-functions/sharedHelperMethods";
 import agent from "../main/apiAgent";
 import { store } from "../main/appStore";
-import { MessageReport, ResponseReport } from "../models/reports";
+import { MessageReport, OtpReport, ResponseReport } from "../models/reports";
 import { QueryParam } from "../models/shared";
 
 export class ReportsStore {
   messagesReport: MessageReport[] = [];
   responsesReport: ResponseReport[] = [];
+  otpsReport: OtpReport[] = [];
   currentQueryParams: QueryParam | null = null;
   totalMsgPages = 1;
   totalResponsePages = 1;
+  totalOtpPages = 1;
 
   constructor() {
     makeAutoObservable(this);
@@ -70,10 +72,23 @@ export class ReportsStore {
     }
   };
 
-  getOtpMessages = async (campaignId: string, query: QueryParam) => {
+  getOtpMessages = async (id: string, query: QueryParam) => {
     try {
+      window.scrollTo(0, 0);
+      this.currentQueryParams = query;
+      const queryString = queryStringBuilder(query);
+
       store.commonStore.setLoading(true);
-      await agent.Reports.otpMessages(campaignId, query);
+      const { result } = await agent.Reports.otpMessages(id, queryString);
+
+      this.totalOtpPages = getNumberOfPages(
+        result.totalNumberOfRecords,
+        query.pageSize
+      );
+
+      runInAction(() => {
+        this.otpsReport = result.result;
+      });
     } catch (error) {
       throw error;
     } finally {

@@ -2,25 +2,20 @@ import { Form, Formik } from "formik";
 import { observer } from "mobx-react-lite";
 import { Button } from "semantic-ui-react";
 import * as Yup from "yup";
-import { CampaignData } from "../../api/models/campaign";
-import { QueryParam } from "../../api/models/shared";
-import { CustomSelect, CustomTextInput } from "../forms/custom/CustomInputs";
+import { useStore } from "../../api/main/appStore";
+import { CustomTextInput } from "../forms/custom/CustomInputs";
 import "./FilterReportForm.css";
 
-interface Props {
-  campaigns: CampaignData[];
-  handleSubmit: (id: string, query: QueryParam) => void;
-}
+export default observer(function FilterOtpForm() {
+  const { reportsStore, userAccountStore } = useStore();
 
-export default observer(function FilterReportForm({
-  campaigns,
-  handleSubmit,
-}: Props) {
+  if (userAccountStore.user === null) return <></>;
+
   return (
     <div className="filter">
       <Formik
         initialValues={{
-          id: "",
+          id: userAccountStore.user.id,
           pageNumber: 1,
           code: "",
           recipientNumber: "",
@@ -28,9 +23,10 @@ export default observer(function FilterReportForm({
           endDate: "",
           pageSize: 10,
         }}
-        onSubmit={(values, { resetForm }) => handleSubmit(values.id, values)}
+        onSubmit={(values, { resetForm }) =>
+          reportsStore.getOtpMessages(values.id, values)
+        }
         validationSchema={Yup.object({
-          id: Yup.string().required("This field is required"),
           startDate: Yup.string().required("This field is required"),
           endDate: Yup.string().required("This field is required"),
         })}
@@ -39,30 +35,11 @@ export default observer(function FilterReportForm({
           <Form>
             <div className="filter-form-container">
               <div>
-                <CustomSelect
-                  name="id"
-                  label="Campaign"
-                  type="text"
-                  children={
-                    <>
-                      <option value="">Select a campaign</option>{" "}
-                      {campaigns.map((el) => {
-                        return (
-                          <option value={el.uniqueId} key={el.id}>
-                            {el.name}
-                          </option>
-                        );
-                      })}
-                    </>
-                  }
-                />
-              </div>
-              <div>
                 <CustomTextInput
                   name="startDate"
                   label="Start Date"
                   type="date"
-                  placeholder="Enter start date"
+                  placeholder="End start date"
                 />
               </div>
               <div>
@@ -71,6 +48,14 @@ export default observer(function FilterReportForm({
                   label="End Date"
                   type="date"
                   placeholder="Enter end date"
+                />
+              </div>
+              <div>
+                <CustomTextInput
+                  name="recipientNumber"
+                  label="Recipient Number (Optional)"
+                  type="text"
+                  placeholder="Enter recipient number"
                 />
               </div>
             </div>
