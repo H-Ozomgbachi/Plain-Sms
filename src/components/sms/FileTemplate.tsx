@@ -19,7 +19,7 @@ export default function FileTemplate() {
 
         <Link
           className="official-download-btn"
-          to="/files/Plain-sms-template-format.xlsx"
+          to="/files/Only-Recipients.xlsx"
           download
           target={"_blank"}
         >
@@ -40,7 +40,7 @@ export default function FileTemplate() {
 
         <Link
           className="official-download-btn"
-          to="/files/Plain-sms-template-format.xlsx"
+          to="/files/Only-Recipients.xlsx"
           download
           target={"_blank"}
         >
