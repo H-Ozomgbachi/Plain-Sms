@@ -22,6 +22,14 @@ export interface RegisterDTO {
   countryCode: string;
 }
 
+export interface UpdateUserDto {
+  userId: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  countryCode: string;
+}
+
 export interface UserData {
   id: string;
   firstName: string;
@@ -31,6 +39,7 @@ export interface UserData {
   countryCode: string;
   roles: string[];
   token: string;
+  balance: number;
 }
 
 export interface CredentialsData {

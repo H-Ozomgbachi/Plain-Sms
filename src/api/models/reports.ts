@@ -16,10 +16,18 @@ export interface MessageReport {
 
 export interface ResponseReport {
   id: number;
-  response: string;
-  campaignId: string;
+  sender: string;
   recipient: string;
+  sentOnUtc: string;
   createdOnUtc: string;
+  campaignId: string;
+  correlationId: string;
+  messageParts: number;
+  priority: number;
+  messageType: string;
+  status: number;
+  text: string;
+  responseCode: string;
 }
 
 export interface OtpReport {
@@ -31,4 +39,16 @@ export interface OtpReport {
   sent: number;
   isVerified: boolean;
   code: string;
+}
+
+export interface TransactionReport {
+  id: string;
+  correlationId: string;
+  comment: string;
+  transactionType: number;
+  units: number;
+  unitPrice: number;
+  amount: number;
+  status: number;
+  createdUTC: string;
 }

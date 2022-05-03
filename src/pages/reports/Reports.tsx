@@ -7,6 +7,7 @@ import Header from "../../components/header/Header";
 import MessagesReport from "../../components/reports/MessagesReport";
 import OtpsReport from "../../components/reports/OtpsReport";
 import ResponsesReport from "../../components/reports/ResponsesReport";
+import TransactionsReport from "../../components/reports/TransactionsReport";
 
 export default observer(function Reports() {
   const { campaignStore, commonStore } = useStore();
@@ -28,11 +29,13 @@ export default observer(function Reports() {
           { icon: <Icon name="mail" />, text: "Messages" },
           { icon: <Icon name="reply" />, text: "Responses" },
           { icon: <Icon name="lock" />, text: "Otps" },
+          { icon: <Icon name="money bill alternate" />, text: "Transactions" },
         ]}
         panels={[
           <MessagesReport campaigns={campaignStore.campaigns} />,
           <ResponsesReport campaigns={campaignStore.campaigns} />,
           <OtpsReport />,
+          <TransactionsReport />,
         ]}
       />
     </>

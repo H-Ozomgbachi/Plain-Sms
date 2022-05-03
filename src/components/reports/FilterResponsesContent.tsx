@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useStore } from "../../api/main/appStore";
 import { DateOnlyFormat } from "../../function-library/helper-functions/sharedHelperMethods";
 import MyPagination from "../pagination/MyPagination";
+import SimpleTable from "../table/SimpleTable";
 import "./FilterMessagesContent.css";
 
 export default observer(function FilterResponsesContent() {
@@ -31,35 +32,29 @@ export default observer(function FilterResponsesContent() {
   )?.name;
 
   return (
-    <>
+    <div className="shadow-card p-3 mt-4">
       <div className={`filtered-msg-container`}>
         <h4 className="filtered-campaign-name">{campaignName}</h4>
 
-        {reportsStore.responsesReport.map((el) => (
-          <div key={el.id} className="shadow-card p-3 my-2">
-            <div className="row pb-2">
-              <div className="col-4 filtered-msg-key">Recipient</div>
-              <div className="col-8 filtered-msg-value">{el.recipient}</div>
-            </div>
-            <div className="row pb-2">
-              <div className="col-4 filtered-msg-key">Response</div>
-              <div className="col-8 filtered-msg-value">{el.response}</div>
-            </div>
-            <div className="row">
-              <div className="col-4 filtered-msg-key">Date</div>
-              <div className="col-8 filtered-msg-value">
-                {DateOnlyFormat(el.createdOnUtc)}
-              </div>
-            </div>
-          </div>
-        ))}
+        <SimpleTable
+          titles={["Sender", "date", "response", "code", "recipient"]}
+          data={reportsStore.responsesReport}
+          tableBodyBuilder={(el) => (
+            <tr key={el.id}>
+              <td>{el.sender}</td>
+              <td>{DateOnlyFormat(el.createdOnUtc)}</td>
+              <td>{el.text}</td>
+              <td>{el.responseCode}</td>
+              <td>{el.recipient}</td>
+            </tr>
+          )}
+        />
       </div>
 
-      <br />
       <MyPagination
         handlePageChange={(index) => handlePageChange(index)}
         totalPages={reportsStore.totalResponsePages}
       />
-    </>
+    </div>
   );
 });

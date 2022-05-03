@@ -13,6 +13,8 @@ export interface QueryParam {
   pageNumber?: number;
   code?: string;
   recipientNumber?: string;
+  transactionId?: string;
+  type?: string;
   startDate: string;
   endDate: string;
   pageSize: number;

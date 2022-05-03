@@ -2,29 +2,33 @@ import { Form, Formik } from "formik";
 import { observer } from "mobx-react-lite";
 import { Button } from "semantic-ui-react";
 import * as Yup from "yup";
-import { CampaignData } from "../../api/models/campaign";
+import { useStore } from "../../api/main/appStore";
 import { QueryParam } from "../../api/models/shared";
 import { toUTCConverter } from "../../function-library/helper-functions/sharedHelperMethods";
 import { CustomSelect, CustomTextInput } from "../forms/custom/CustomInputs";
 import "./FilterReportForm.css";
 
 interface Props {
-  campaigns: CampaignData[];
+  isOnlyDeposit: boolean;
   handleSubmit: (id: string, query: QueryParam) => void;
 }
 
-export default observer(function FilterReportForm({
-  campaigns,
+export default observer(function FilterTransactionForm({
+  isOnlyDeposit,
   handleSubmit,
 }: Props) {
+  const { userAccountStore } = useStore();
+
+  if (userAccountStore.user === null) return <></>;
+
   return (
     <div className="filter">
       <Formik
         initialValues={{
-          id: "",
+          id: userAccountStore.user.id,
           pageNumber: 1,
-          code: "",
-          recipientNumber: "",
+          transactionId: "",
+          type: isOnlyDeposit ? "3" : "",
           startDate: new Date(),
           endDate: new Date(),
           pageSize: 10,
@@ -37,7 +41,6 @@ export default observer(function FilterReportForm({
           })
         }
         validationSchema={Yup.object({
-          id: Yup.string().required("This field is required"),
           startDate: Yup.string().required("This field is required"),
           endDate: Yup.string().required("This field is required"),
         })}
@@ -45,26 +48,23 @@ export default observer(function FilterReportForm({
         {({ isSubmitting }) => (
           <Form>
             <div className="filter-form-container">
-              <div>
-                <CustomSelect
-                  name="id"
-                  label="Campaign"
-                  type="text"
-                  children={
-                    <>
-                      <option value="">Select a campaign</option>{" "}
-                      {campaigns.map((el) => {
-                        return (
-                          <option value={el.uniqueId} key={el.id}>
-                            {el.name}
-                          </option>
-                        );
-                      })}
-                    </>
-                  }
-                  required
-                />
-              </div>
+              {!isOnlyDeposit && (
+                <div>
+                  <CustomSelect
+                    name="type"
+                    label="Enter transaction type"
+                    type="text"
+                    children={
+                      <>
+                        <option value="">All transactions</option>
+                        <option value="3">Deposits</option>
+                        <option value="2">OTP</option>
+                        <option value="1">SMS</option>
+                      </>
+                    }
+                  />
+                </div>
+              )}
               <div>
                 <CustomTextInput
                   name="startDate"
@@ -85,10 +85,10 @@ export default observer(function FilterReportForm({
               </div>
               <div>
                 <CustomTextInput
-                  name="recipientNumber"
-                  label="Recipient no."
+                  name="transactionId"
+                  label="Transaction Id"
                   type="text"
-                  placeholder="Enter recipient number"
+                  placeholder="Enter transaction id"
                 />
               </div>
             </div>

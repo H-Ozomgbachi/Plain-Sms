@@ -25,7 +25,7 @@ export default observer(function CreateCampaignForm({
   };
 
   return (
-    <div>
+    <div className="shadow-card p-3">
       {currentData && (
         <h5 className="text-center text-secondary">Edit Campaign</h5>
       )}
@@ -63,6 +63,7 @@ export default observer(function CreateCampaignForm({
               icon="pencil"
               color="vk"
               type="submit"
+              className={currentData ? "" : "official-form-btn"}
             />
             {currentData && <Button content="Cancel" onClick={closeEdit} />}
           </Form>

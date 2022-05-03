@@ -20,7 +20,7 @@ export default observer(function UserConfiguration({ config }: Props) {
     <div>
       <CustomDefaultTabHeading content="Configuration" />
 
-      <div className="p-2">
+      <div className="p-3 shadow-card">
         <Formik
           initialValues={{
             countryCode: config?.countryCode,
@@ -55,32 +55,32 @@ export default observer(function UserConfiguration({ config }: Props) {
               <MyTextInput
                 name="smsUnitPrice"
                 placeholder="Enter SMS Unit Price :"
-                label="Unit Price"
+                label="Unit Price (₦)"
                 disabled
               />
 
               <MyTextInput
                 name="smsIntlUnitPrice"
                 placeholder="Enter Intl. Unit Price"
-                label="Intl. Unit Price"
+                label="International Unit Price (₦)"
                 disabled
               />
               <MyTextInput
                 name="whatsappUnitPrice"
                 placeholder="Enter WhatsApp Unit Price"
-                label="WhatsApp Unit Price"
+                label="WhatsApp Unit Price [COMING SOON]"
                 disabled
               />
               <MyTextInput
                 name="otpUnitPrice"
                 placeholder="Enter OTP Unit Price"
-                label="OTP Unit Price"
+                label="OTP Unit Price (₦)"
                 disabled
               />
               <MyTextInput
                 name="otpIntlUnitPrice"
                 placeholder="Enter OTP Intl. Unit Price"
-                label="OTP Intl Unit Price"
+                label="OTP International Unit Price (₦)"
                 disabled
               />
               <MyTextInput
@@ -107,6 +107,7 @@ export default observer(function UserConfiguration({ config }: Props) {
                 type="submit"
                 color="vk"
                 icon="edit"
+                className="official-form-btn"
               />
             </Form>
           )}

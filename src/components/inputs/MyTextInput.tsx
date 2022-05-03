@@ -33,6 +33,7 @@ export default function MyTextInput(props: Props) {
   return (
     <Form.Field error={meta.touched && !!meta.error}>
       <label className="input-text-label"> {props.label} </label>
+
       <input
         {...field}
         {...props}

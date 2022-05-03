@@ -3,6 +3,7 @@ import { observer } from "mobx-react-lite";
 import { Button } from "semantic-ui-react";
 import * as Yup from "yup";
 import { useStore } from "../../api/main/appStore";
+import { toUTCConverter } from "../../function-library/helper-functions/sharedHelperMethods";
 import { CustomTextInput } from "../forms/custom/CustomInputs";
 import "./FilterReportForm.css";
 
@@ -19,12 +20,16 @@ export default observer(function FilterOtpForm() {
           pageNumber: 1,
           code: "",
           recipientNumber: "",
-          startDate: "",
-          endDate: "",
+          startDate: new Date(),
+          endDate: new Date(),
           pageSize: 10,
         }}
         onSubmit={(values, { resetForm }) =>
-          reportsStore.getOtpMessages(values.id, values)
+          reportsStore.getOtpMessages(values.id, {
+            ...values,
+            startDate: toUTCConverter(values.startDate),
+            endDate: toUTCConverter(values.endDate),
+          })
         }
         validationSchema={Yup.object({
           startDate: Yup.string().required("This field is required"),
@@ -38,22 +43,24 @@ export default observer(function FilterOtpForm() {
                 <CustomTextInput
                   name="startDate"
                   label="Start Date"
-                  type="date"
+                  type="datetime-local"
                   placeholder="End start date"
+                  required
                 />
               </div>
               <div>
                 <CustomTextInput
                   name="endDate"
                   label="End Date"
-                  type="date"
+                  type="datetime-local"
                   placeholder="Enter end date"
+                  required
                 />
               </div>
               <div>
                 <CustomTextInput
                   name="recipientNumber"
-                  label="Recipient Number (Optional)"
+                  label="Recipient no."
                   type="text"
                   placeholder="Enter recipient number"
                 />
@@ -63,7 +70,7 @@ export default observer(function FilterOtpForm() {
             <Button
               loading={isSubmitting}
               content="Continue"
-              className="filter-form-btn"
+              className="official-form-btn"
               color="vk"
               type="submit"
             />

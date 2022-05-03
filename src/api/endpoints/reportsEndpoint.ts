@@ -1,5 +1,10 @@
 import requests from "../main/apiConfig";
-import { MessageReport, OtpReport, ResponseReport } from "../models/reports";
+import {
+  MessageReport,
+  OtpReport,
+  ResponseReport,
+  TransactionReport,
+} from "../models/reports";
 import { ApiResponseData, PagedResult } from "../models/shared";
 
 export const Reports = {
@@ -16,5 +21,10 @@ export const Reports = {
   otpMessages: (accountId: string, queryStr: string) =>
     requests.get<ApiResponseData<PagedResult<OtpReport>>>(
       `/reports/accounts/${accountId}/otp-messages?${queryStr}`
+    ),
+
+  transactions: (accountId: string, queryStr: string) =>
+    requests.get<ApiResponseData<PagedResult<TransactionReport>>>(
+      `/reports/accounts/${accountId}/transactions?${queryStr}`
     ),
 };

@@ -8,6 +8,7 @@ import {
   LoginDTO,
   RegisterDTO,
   ResetPasswordDTO,
+  UpdateUserDto,
   UserData,
 } from "../models/userAccount";
 
@@ -17,6 +18,12 @@ export const UserAccount = {
 
   register: (payload: RegisterDTO) =>
     requests.post<ApiResponseData<UserData>>("/account/register", payload),
+
+  update: (payload: UpdateUserDto) =>
+    requests.put<ApiResponseData<UserData>>(
+      `/account/${payload.userId}`,
+      payload
+    ),
 
   myAccount: (id: string) =>
     requests.get<ApiResponseData<UserData>>(`/account/${id}`),

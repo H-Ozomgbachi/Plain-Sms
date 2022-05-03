@@ -10,9 +10,13 @@ import {
 export class CampaignStore {
   campaigns: CampaignData[] = [];
   currentCampaign: CampaignData | null = null;
+  isEditingCampaign: boolean = false;
+
   constructor() {
     makeAutoObservable(this);
   }
+
+  setIsEditingCampaign = (value: boolean) => (this.isEditingCampaign = value);
 
   createCampaign = async (values: CreateCampaign) => {
     try {

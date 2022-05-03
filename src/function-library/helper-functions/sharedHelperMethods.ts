@@ -1,5 +1,5 @@
-import dateFormat from "dateformat";
 import { QueryParam } from "../../api/models/shared";
+import moment from "moment";
 
 export const queryStringBuilder = (query: QueryParam) => {
   const obj = query as any;
@@ -15,9 +15,22 @@ export const queryStringBuilder = (query: QueryParam) => {
 };
 
 export function DateOnlyFormat(dateString: string) {
-  return dateFormat(new Date(dateString).getTime(), "d/mmm/yyyy");
+  return moment(dateString).format("DD-MMM-yyyy hh:mm a");
 }
 
 export function getNumberOfPages(totalRecords: number, pageSize: number) {
   return Math.ceil(totalRecords / pageSize);
 }
+
+export function toUTCConverter(dateObject: Date | string) {
+  return new Date(new Date(dateObject).toUTCString()).toISOString();
+}
+
+export const NairaFormatter = (value: number) => {
+  const result = new Intl.NumberFormat("en", {
+    style: "currency",
+    currency: "NGN",
+  }).format(value);
+
+  return result.replace("NGN", "₦");
+};

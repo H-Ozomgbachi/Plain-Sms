@@ -1,3 +1,4 @@
+import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 import { makeAutoObservable, reaction } from "mobx";
 import { customHistory } from "../..";
 
@@ -8,6 +9,8 @@ export class CommonStore {
   success: string | null = null;
   loading = false;
   drawerVisible = false;
+  modalVisible = false;
+  modalContent: ReactJSXElement | null = null;
   isThereError = false;
   isThereSuccess = false;
   lastVisitedPathname: string | null = null;
@@ -55,6 +58,13 @@ export class CommonStore {
   setLoading = (value: boolean) => (this.loading = value);
 
   setDrawerVisible = (value: boolean) => (this.drawerVisible = value);
+
+  setModalVisible = (value: boolean) => (this.modalVisible = value);
+
+  setModalContent = (content: ReactJSXElement) => {
+    this.modalVisible = true;
+    this.modalContent = content;
+  };
 
   setIsThereError = (value: boolean) => (this.isThereError = value);
 

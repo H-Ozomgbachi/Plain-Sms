@@ -62,7 +62,7 @@ export default observer(function Login() {
 
                 <Button
                   loading={isSubmitting}
-                  content="Submit"
+                  content="Sign in"
                   type="submit"
                   className="login-form-btn"
                 />

@@ -24,3 +24,30 @@
   color: red;
   font-size: 0.85rem;
 }
+
+.input-with-btn-box {
+  display: flex;
+  border: 1px solid #ccc;
+}
+
+.text-input-with-btn {
+  padding: 0.4rem;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  width: 100%;
+  background-color: transparent;
+}
+
+.input-btn {
+  border: none;
+  padding: 0.4rem;
+}
+
+.is-copied {
+  background-color: green;
+  color: white;
+}
+.done-copy {
+  color: #222;
+}

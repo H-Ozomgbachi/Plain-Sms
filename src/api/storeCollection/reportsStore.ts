@@ -5,17 +5,24 @@ import {
 } from "../../function-library/helper-functions/sharedHelperMethods";
 import agent from "../main/apiAgent";
 import { store } from "../main/appStore";
-import { MessageReport, OtpReport, ResponseReport } from "../models/reports";
+import {
+  MessageReport,
+  OtpReport,
+  ResponseReport,
+  TransactionReport,
+} from "../models/reports";
 import { QueryParam } from "../models/shared";
 
 export class ReportsStore {
   messagesReport: MessageReport[] = [];
   responsesReport: ResponseReport[] = [];
   otpsReport: OtpReport[] = [];
+  transactionsReport: TransactionReport[] = [];
   currentQueryParams: QueryParam | null = null;
   totalMsgPages = 1;
   totalResponsePages = 1;
   totalOtpPages = 1;
+  totalTransactionsPages = 1;
 
   constructor() {
     makeAutoObservable(this);
@@ -88,6 +95,30 @@ export class ReportsStore {
 
       runInAction(() => {
         this.otpsReport = result.result;
+      });
+    } catch (error) {
+      throw error;
+    } finally {
+      store.commonStore.setLoading(false);
+    }
+  };
+
+  getTransactions = async (id: string, query: QueryParam) => {
+    try {
+      window.scrollTo(0, 0);
+      this.currentQueryParams = query;
+      const queryString = queryStringBuilder(query);
+
+      store.commonStore.setLoading(true);
+      const { result } = await agent.Reports.transactions(id, queryString);
+
+      this.totalTransactionsPages = getNumberOfPages(
+        result.totalNumberOfRecords,
+        query.pageSize
+      );
+
+      runInAction(() => {
+        this.transactionsReport = result.result;
       });
     } catch (error) {
       throw error;

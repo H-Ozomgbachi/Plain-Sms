@@ -12,6 +12,7 @@ import { useStore } from "../../api/main/appStore";
 import { processRecipientsArray } from "../../function-library/helper-functions/smsHelperMethods";
 import { campaignOptionsBuilder } from "../../function-library/helper-functions/campaignHelperMethod";
 import { CampaignData } from "../../api/models/campaign";
+import { toUTCConverter } from "../../function-library/helper-functions/sharedHelperMethods";
 
 interface Props {
   campaigns: CampaignData[];
@@ -26,7 +27,7 @@ export default observer(function CreateSmsOne({ campaigns }: Props) {
   const INITIAL_VALUES = {
     message: "",
     sender: "",
-    schduleDateUTC: "",
+    schduleDateUTC: new Date(),
     priority: 0,
     campaignId: "",
   };
@@ -56,6 +57,7 @@ export default observer(function CreateSmsOne({ campaigns }: Props) {
             .sendOneMessageToMany({
               ...values,
               priority: +values.priority,
+              schduleDateUTC: toUTCConverter(values.schduleDateUTC),
               recipients: processRecipientsArray(uploadedRecipients),
             })
             .finally(() => resetForm({ values: INITIAL_VALUES }))
@@ -107,7 +109,7 @@ export default observer(function CreateSmsOne({ campaigns }: Props) {
             <MyTextInput
               name="schduleDateUTC"
               label="Schedule Date"
-              type="date"
+              type="datetime-local"
             />
 
             <Button
@@ -116,6 +118,7 @@ export default observer(function CreateSmsOne({ campaigns }: Props) {
               content="Send SMS"
               type="submit"
               color="vk"
+              className="official-form-btn"
             />
           </Form>
         )}

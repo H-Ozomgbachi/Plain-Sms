@@ -6,6 +6,7 @@ interface Tab {
   icon: ReactJSXElement;
   text: string;
   callbackFn?: () => void;
+  isDropdown?: boolean;
 }
 
 interface Props {
@@ -20,7 +21,7 @@ export default function CustomVerticalTab({ tabs, panels }: Props) {
     <div className="vertical-tab-container">
       <div className="vertical-tab-left">
         {tabs.map((el, index) => {
-          return (
+          return !el.isDropdown ? (
             <span
               className={`vertical-tab-left_item ${
                 index === bodyIndex ? "vertical-tab-left_item-active" : ""
@@ -33,7 +34,7 @@ export default function CustomVerticalTab({ tabs, panels }: Props) {
               <span className="vertical-tab-left_item-icon">{el.icon}</span>
               <span className="vertical-tab-left_item-text">{el.text}</span>
             </span>
-          );
+          ) : null;
         })}
       </div>
 

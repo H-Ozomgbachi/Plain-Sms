@@ -18,6 +18,7 @@ import Reports from "./pages/reports/Reports";
 import Sms from "./pages/sms/Sms";
 import { RedirectTo } from "./api/models/shared";
 import Payment from "./pages/payments/Payment";
+import MyModal from "./components/modal/MyModal";
 
 export default observer(function App() {
   const { commonStore, userAccountStore } = useStore();
@@ -44,6 +45,7 @@ export default observer(function App() {
     <>
       <LoadingComponent active={commonStore.loading} />
       <HamburgerMenu visible={commonStore.drawerVisible} />
+      <MyModal visible={commonStore.modalVisible} />
 
       <div className="page-container">
         <ErrorDisplay visible={commonStore.isThereError} />

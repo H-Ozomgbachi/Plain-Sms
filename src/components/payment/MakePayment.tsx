@@ -15,7 +15,7 @@ export default observer(function MakePayment() {
 
   return (
     <>
-      <CustomDefaultTabHeading content="Initialize Deposit" />
+      <CustomDefaultTabHeading content="Add Funds" />
       <div className="shadow-card make-payment-container">
         <Formik
           initialValues={{
@@ -43,7 +43,7 @@ export default observer(function MakePayment() {
               <Button
                 loading={isSubmitting}
                 content="Continue"
-                className="w-100 mt-3"
+                className="official-form-btn"
                 color="vk"
                 type="submit"
               />

@@ -9,15 +9,16 @@ import { useStore } from "../../api/main/appStore";
 import Header from "../../components/header/Header";
 import { useEffect } from "react";
 import { customHistory } from "../..";
+import ModalDecisionContent from "../../components/modal/ModalDecisionContent";
 
 export default observer(function MyAccount() {
-  const { userAccountStore } = useStore();
+  const { userAccountStore, commonStore } = useStore();
 
   useEffect(() => {
     if (userAccountStore.user === null) {
       customHistory.push("/account/login");
     }
-  }, [userAccountStore.user]);
+  }, [userAccountStore.user, userAccountStore]);
 
   return (
     <>
@@ -30,7 +31,13 @@ export default observer(function MyAccount() {
           {
             icon: <Icon name="sign-out" />,
             text: "Log out",
-            callbackFn: userAccountStore.logout,
+            callbackFn: () =>
+              commonStore.setModalContent(
+                <ModalDecisionContent
+                  actionName="logout of this application"
+                  actionCallback={userAccountStore.logout}
+                />
+              ),
           },
         ]}
         panels={[

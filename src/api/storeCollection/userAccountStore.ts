@@ -10,6 +10,7 @@ import {
   LoginDTO,
   RegisterDTO,
   ResetPasswordDTO,
+  UpdateUserDto,
   UserData,
 } from "../models/userAccount";
 
@@ -62,6 +63,24 @@ export class UserAccountStore {
       });
     } catch (error) {
       throw error;
+    }
+  };
+
+  update = async (values: UpdateUserDto) => {
+    try {
+      window.scrollTo(0, 0);
+      store.commonStore.setLoading(true);
+
+      const { result } = await agent.UserAccount.update(values);
+
+      runInAction(() => {
+        this.user = result;
+      });
+      store.commonStore.setSuccess("Profile updated ✓");
+    } catch (error) {
+      throw error;
+    } finally {
+      store.commonStore.setLoading(false);
     }
   };
 
