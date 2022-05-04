@@ -23,4 +23,22 @@ export class SmsStore {
       store.commonStore.setLoading(false);
     }
   };
+
+  sendManyMessageToMany = async (values: CreateSmsDto[]) => {
+    window.scrollTo(0, 0);
+
+    values.forEach(async (value) => {
+      try {
+        store.commonStore.setLoading(true);
+        const { statusCode } = await agent.Sms.sendSms(value.campaignId, value);
+        if (statusCode) {
+          store.commonStore.setSuccess("Successful");
+        }
+      } catch (error) {
+        throw error;
+      } finally {
+        store.commonStore.setLoading(false);
+      }
+    });
+  };
 }

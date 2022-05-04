@@ -5,6 +5,7 @@ import CreateSmsOne from "./CreateSmsOne";
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { useStore } from "../../api/main/appStore";
+import CreateSmsMany from "./CreateSmsMany";
 
 export default observer(function SendSms() {
   const { campaignStore, commonStore } = useStore();
@@ -26,7 +27,10 @@ export default observer(function SendSms() {
           "One message to many recipients",
           "Many messages to many recipients",
         ]}
-        panels={[<CreateSmsOne campaigns={campaignStore.campaigns} />, <></>]}
+        panels={[
+          <CreateSmsOne campaigns={campaignStore.campaigns} />,
+          <CreateSmsMany campaigns={campaignStore.campaigns} />,
+        ]}
       />
     </div>
   );

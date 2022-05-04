@@ -35,12 +35,13 @@ export default function FileTemplate() {
         <p>
           Use this template if you intend to send{" "}
           <span className="text-danger">many messages to many recipients.</span>{" "}
-          The template contains a single column named recipients.
+          The template contains a three column named message, recipients and
+          schedule date.
         </p>
 
         <Link
           className="official-download-btn"
-          to="/files/Only-Recipients.xlsx"
+          to="/files/Message-with-recipients.xlsx"
           download
           target={"_blank"}
         >

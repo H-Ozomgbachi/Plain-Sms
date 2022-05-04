@@ -18,7 +18,7 @@ interface Props {
 export const CustomTextInput = (props: Props) => {
   const [field, meta] = useField(props);
   return (
-    <div>
+    <div className="mb-2">
       <label className="input-label">
         {props.label}{" "}
         {props.required ? <span className="text-danger">*</span> : null}
@@ -32,10 +32,27 @@ export const CustomTextInput = (props: Props) => {
   );
 };
 
+export const CustomTextArea = (props: Props) => {
+  const [field, meta] = useField(props);
+  return (
+    <div className="mb-2">
+      <label className="input-label">
+        {props.label}{" "}
+        {props.required ? <span className="text-danger">*</span> : null}
+      </label>
+
+      <textarea rows={8} className={`text-input`} {...field} {...props} />
+      {meta.touched && meta.error ? (
+        <div className="input-text-error">{meta.error}</div>
+      ) : null}
+    </div>
+  );
+};
+
 export const CustomSelect = (props: Props) => {
   const [field, meta] = useField(props);
   return (
-    <div>
+    <div className="mb-2">
       <label>
         {props.label}{" "}
         {props.required ? <span className="text-danger">*</span> : null}
@@ -53,7 +70,7 @@ export const CustomTextInputWithButton = (props: Props) => {
   const [btnTitle, setBtnTitle] = useState("copy");
   const [isCopied, setIsCopied] = useState(false);
   return (
-    <div>
+    <div className="mb-2">
       <label className="input-label">{props.label}</label>
       <div className="input-with-btn-box">
         <input className={`text-input-with-btn`} {...field} {...props} />

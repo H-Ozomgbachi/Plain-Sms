@@ -3,6 +3,13 @@ export interface RecipientsOnly {
   __rowNum__: number;
 }
 
+export interface RecipientsWithMessage {
+  message: string;
+  recipients: string;
+  schduleDateUTC: string;
+  __rowNum__: number;
+}
+
 export interface CreateSmsDto {
   campaignId: string;
   recipients: string[];

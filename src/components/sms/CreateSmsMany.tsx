@@ -3,34 +3,28 @@ import { Button } from "semantic-ui-react";
 import * as Yup from "yup";
 import * as xlsx from "xlsx";
 import { useState } from "react";
-import { RecipientsOnly } from "../../api/models/sms";
+import { RecipientsWithMessage } from "../../api/models/sms";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../api/main/appStore";
-import { processRecipientsArray } from "../../function-library/helper-functions/smsHelperMethods";
+import { processRecipientWithMessage } from "../../function-library/helper-functions/smsHelperMethods";
 import { CampaignData } from "../../api/models/campaign";
-import { toUTCConverter } from "../../function-library/helper-functions/sharedHelperMethods";
-import {
-  CustomSelect,
-  CustomTextArea,
-  CustomTextInput,
-} from "../forms/custom/CustomInputs";
+import { CustomSelect } from "../forms/custom/CustomInputs";
 
 interface Props {
   campaigns: CampaignData[];
 }
 
-export default observer(function CreateSmsOne({ campaigns }: Props) {
-  const [uploadedRecipients, setUploadedRecipients] = useState<
-    RecipientsOnly[]
+export default observer(function CreateSmsMany({ campaigns }: Props) {
+  const [uploadedContent, setUploadedContent] = useState<
+    RecipientsWithMessage[]
   >([]);
   const { smsStore } = useStore();
 
   const INITIAL_VALUES = {
-    message: "",
+    campaignId: "",
     sender: "",
     schduleDateUTC: new Date(),
     priority: 0,
-    campaignId: "",
   };
 
   const readUploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,8 +36,10 @@ export default observer(function CreateSmsOne({ campaigns }: Props) {
         const workbook = xlsx.read(data, { type: "array" });
         const sheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[sheetName];
-        const json = xlsx.utils.sheet_to_json(worksheet) as RecipientsOnly[];
-        setUploadedRecipients(json);
+        const json = xlsx.utils.sheet_to_json(
+          worksheet
+        ) as RecipientsWithMessage[];
+        setUploadedContent(json);
       };
       reader.readAsArrayBuffer(e.target.files[0]);
     }
@@ -55,22 +51,23 @@ export default observer(function CreateSmsOne({ campaigns }: Props) {
         initialValues={INITIAL_VALUES}
         onSubmit={async (values, { setErrors, resetForm }) =>
           smsStore
-            .sendOneMessageToMany({
-              ...values,
-              priority: +values.priority,
-              schduleDateUTC: toUTCConverter(values.schduleDateUTC),
-              recipients: processRecipientsArray(uploadedRecipients),
-            })
+            .sendManyMessageToMany(
+              processRecipientWithMessage(
+                uploadedContent,
+                values.campaignId,
+                values.sender,
+                values.priority
+              )
+            )
             .finally(() => resetForm({ values: INITIAL_VALUES }))
         }
         validationSchema={Yup.object({
-          message: Yup.string().required("This field is required"),
-          sender: Yup.string().required("This field is required"),
           campaignId: Yup.string().required("please select a campaign"),
+          sender: Yup.string().required("This field is required"),
         })}
       >
-        {({ handleSubmit, isSubmitting, isValid, dirty, values }) => (
-          <Form className="">
+        {({ handleSubmit, isSubmitting }) => (
+          <Form>
             <CustomSelect
               name="campaignId"
               label="Select Campaign"
@@ -90,12 +87,6 @@ export default observer(function CreateSmsOne({ campaigns }: Props) {
               required
             />
 
-            <CustomTextArea
-              name="message"
-              placeholder="Write your message here..."
-              label="Message"
-            />
-
             <CustomSelect
               name="sender"
               label="Sender Name"
@@ -111,8 +102,8 @@ export default observer(function CreateSmsOne({ campaigns }: Props) {
               required
             />
 
-            <div className="mb-2">
-              <label className="input-text-label">Recipients</label>
+            <div>
+              <label className="input-text-label">File</label>
               <input
                 name="recipients"
                 type="file"
@@ -133,12 +124,6 @@ export default observer(function CreateSmsOne({ campaigns }: Props) {
                 </>
               }
               required
-            />
-
-            <CustomTextInput
-              name="schduleDateUTC"
-              label="Schedule Date"
-              type="datetime-local"
             />
 
             <Button
