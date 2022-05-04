@@ -2,10 +2,12 @@ import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { Icon } from "semantic-ui-react";
 import { useStore } from "../../api/main/appStore";
+import { refineOtpsForDownload } from "../../function-library/helper-functions/reportsHelperMethods";
 import { DateOnlyFormat } from "../../function-library/helper-functions/sharedHelperMethods";
 import MyPagination from "../pagination/MyPagination";
 import SimpleTable from "../table/SimpleTable";
 import "./FilterMessagesContent.css";
+import PageSizeAndExport from "./PageSizeAndExport";
 
 export default observer(function FilterOtpsContent() {
   const { reportsStore, userAccountStore } = useStore();
@@ -26,10 +28,29 @@ export default observer(function FilterOtpsContent() {
     }
   };
 
+  const handlePageSizeChange = (size: number) => {
+    if (
+      reportsStore.otpsReport.length !== 0 &&
+      reportsStore.currentQueryParams &&
+      userAccountStore.user
+    ) {
+      const query = {
+        ...reportsStore.currentQueryParams,
+        pageSize: +size,
+      };
+      reportsStore.getOtpMessages(userAccountStore.user.id, query);
+    }
+  };
+
   if (reportsStore.otpsReport.length === 0) return <></>;
 
   return (
     <div className="shadow-card p-3 mt-4">
+      <PageSizeAndExport
+        fileName={`otps-${Date.now()}`}
+        data={refineOtpsForDownload(reportsStore.otpsReport)}
+        handlePageSizeChange={handlePageSizeChange}
+      />
       <SimpleTable
         titles={[
           "Recipient",

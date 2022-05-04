@@ -1,9 +1,11 @@
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { useStore } from "../../api/main/appStore";
+import { refineMessagesForDownload } from "../../function-library/helper-functions/reportsHelperMethods";
 import { DateOnlyFormat } from "../../function-library/helper-functions/sharedHelperMethods";
 import MyPagination from "../pagination/MyPagination";
 import "./FilterMessagesContent.css";
+import PageSizeAndExport from "./PageSizeAndExport";
 
 export default observer(function FilterMessagesContent() {
   const { reportsStore, campaignStore } = useStore();
@@ -24,6 +26,20 @@ export default observer(function FilterMessagesContent() {
     }
   };
 
+  const handlePageSizeChange = (size: number) => {
+    if (
+      reportsStore.messagesReport.length !== 0 &&
+      reportsStore.currentQueryParams
+    ) {
+      const id = reportsStore.messagesReport[0].campaignId;
+      const query = {
+        ...reportsStore.currentQueryParams,
+        pageSize: size,
+      };
+      reportsStore.getSmsMessages(id, query);
+    }
+  };
+
   if (reportsStore.messagesReport.length === 0) return <></>;
 
   const campaignName = campaignStore.campaigns.find(
@@ -34,6 +50,11 @@ export default observer(function FilterMessagesContent() {
     <>
       <div className={`filtered-msg-container`}>
         <h4 className="filtered-campaign-name">{campaignName}</h4>
+        <PageSizeAndExport
+          fileName={`messages-${Date.now()}`}
+          data={refineMessagesForDownload(reportsStore.messagesReport)}
+          handlePageSizeChange={handlePageSizeChange}
+        />
 
         {reportsStore.messagesReport.map((el) => (
           <div key={el.id} className="shadow-card p-3 my-2">

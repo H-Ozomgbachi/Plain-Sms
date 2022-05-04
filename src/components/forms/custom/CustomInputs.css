@@ -51,3 +51,15 @@
 .done-copy {
   color: #222;
 }
+
+.inline-text-input {
+  padding: 0.4rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: transparent;
+}
+
+.inline-text-input:focus {
+  outline: none;
+}

@@ -1,7 +1,10 @@
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { useStore } from "../../api/main/appStore";
-import { transactionTypeName } from "../../function-library/helper-functions/reportsHelperMethods";
+import {
+  refineTransactionsForDownload,
+  transactionTypeName,
+} from "../../function-library/helper-functions/reportsHelperMethods";
 import {
   DateOnlyFormat,
   NairaFormatter,
@@ -9,6 +12,7 @@ import {
 import MyPagination from "../pagination/MyPagination";
 import SimpleTable from "../table/SimpleTable";
 import "./FilterMessagesContent.css";
+import PageSizeAndExport from "./PageSizeAndExport";
 
 export default observer(function FilterTransactionsContent() {
   const { reportsStore, userAccountStore } = useStore();
@@ -29,10 +33,30 @@ export default observer(function FilterTransactionsContent() {
     }
   };
 
+  const handlePageSizeChange = (size: number) => {
+    if (
+      reportsStore.transactionsReport.length !== 0 &&
+      reportsStore.currentQueryParams &&
+      userAccountStore.user
+    ) {
+      const query = {
+        ...reportsStore.currentQueryParams,
+        pageSize: +size,
+      };
+      reportsStore.getTransactions(userAccountStore.user.id, query);
+    }
+  };
+
   if (reportsStore.transactionsReport.length === 0) return <></>;
 
   return (
     <div className="shadow-card p-3 mt-4">
+      <PageSizeAndExport
+        fileName={`transaction-${Date.now()}`}
+        data={refineTransactionsForDownload(reportsStore.transactionsReport)}
+        handlePageSizeChange={handlePageSizeChange}
+      />
+
       <SimpleTable
         titles={["Date", "transaction type", "Units", "Unit Price", "Amount"]}
         data={reportsStore.transactionsReport}

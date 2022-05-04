@@ -1,10 +1,12 @@
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { useStore } from "../../api/main/appStore";
+import { refineResponseForDownload } from "../../function-library/helper-functions/reportsHelperMethods";
 import { DateOnlyFormat } from "../../function-library/helper-functions/sharedHelperMethods";
 import MyPagination from "../pagination/MyPagination";
 import SimpleTable from "../table/SimpleTable";
 import "./FilterMessagesContent.css";
+import PageSizeAndExport from "./PageSizeAndExport";
 
 export default observer(function FilterResponsesContent() {
   const { reportsStore, campaignStore } = useStore();
@@ -25,6 +27,20 @@ export default observer(function FilterResponsesContent() {
     }
   };
 
+  const handlePageSizeChange = (size: number) => {
+    if (
+      reportsStore.responsesReport.length !== 0 &&
+      reportsStore.currentQueryParams
+    ) {
+      const id = reportsStore.responsesReport[0].campaignId;
+      const query = {
+        ...reportsStore.currentQueryParams,
+        pageSize: size,
+      };
+      reportsStore.getSmsMessageResponses(id, query);
+    }
+  };
+
   if (reportsStore.responsesReport.length === 0) return <></>;
 
   const campaignName = campaignStore.campaigns.find(
@@ -35,6 +51,12 @@ export default observer(function FilterResponsesContent() {
     <div className="shadow-card p-3 mt-4">
       <div className={`filtered-msg-container`}>
         <h4 className="filtered-campaign-name">{campaignName}</h4>
+
+        <PageSizeAndExport
+          fileName={`messages-response-${Date.now()}`}
+          data={refineResponseForDownload(reportsStore.responsesReport)}
+          handlePageSizeChange={handlePageSizeChange}
+        />
 
         <SimpleTable
           titles={["Sender", "date", "response", "code", "recipient"]}
