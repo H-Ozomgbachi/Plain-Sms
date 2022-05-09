@@ -1,10 +1,11 @@
+import { observer } from "mobx-react-lite";
 import { Icon } from "semantic-ui-react";
 import CustomVerticalTab from "../../components/custom-vertical-tab/CustomVerticalTab";
 import Header from "../../components/header/Header";
 import MakePayment from "../../components/payment/MakePayment";
 import PaymentHistory from "../../components/payment/PaymentHistory";
 
-export default function Payment() {
+export default observer(function Payment() {
   return (
     <>
       <Header />
@@ -17,4 +18,4 @@ export default function Payment() {
       />
     </>
   );
-}
+});

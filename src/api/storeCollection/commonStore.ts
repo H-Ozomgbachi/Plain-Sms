@@ -1,6 +1,7 @@
 import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 import { makeAutoObservable, reaction } from "mobx";
 import { customHistory } from "../..";
+import { store } from "../main/appStore";
 
 export class CommonStore {
   id: string | null = window.localStorage.getItem("id-plainsms");
@@ -110,6 +111,11 @@ export class CommonStore {
 
   redirectDecision = () => {
     let linkToDirect;
+
+    if (store.paymentStore.trxnRef) {
+      linkToDirect = store.paymentStore.trxnRef;
+      return customHistory.push(linkToDirect);
+    }
 
     if (
       this.lastVisitedPathname !== null &&

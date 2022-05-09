@@ -9,4 +9,11 @@ export interface PaymentResponse {
   reference: string;
   authorization_url: string;
   transactionRef: string;
+  callbackurl: string;
+}
+
+export interface VerifyPayResponse {
+  status: string;
+  amount: string;
+  gateway_response: string;
 }

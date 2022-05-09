@@ -28,7 +28,7 @@ export default observer(function App() {
       userAccountStore.myAccount(commonStore.id);
     }
 
-    window.addEventListener("beforeunload", () =>
+    window.addEventListener("unload", () =>
       commonStore.setOnreloadPath(window.location.pathname)
     );
   }, [commonStore.id, commonStore.token, userAccountStore, commonStore]);

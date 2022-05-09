@@ -7,9 +7,22 @@ import { Button } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../api/main/appStore";
 import { frontendUrl } from "../../urls";
+import { useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
 
 export default observer(function MakePayment() {
   const { userAccountStore, paymentStore } = useStore();
+
+  const [searchParam] = useSearchParams();
+
+  useEffect(() => {
+    const txnref = searchParam.get("txnref");
+    (async function verify() {
+      if (txnref) {
+        await paymentStore.verifyPayment(txnref);
+      }
+    })();
+  }, [searchParam, paymentStore]);
 
   if (userAccountStore.user === null) return <></>;
 
