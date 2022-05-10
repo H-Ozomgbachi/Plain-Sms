@@ -1,5 +1,4 @@
 import { observer } from "mobx-react-lite";
-import { useEffect } from "react";
 import { useStore } from "../../api/main/appStore";
 import { refinePaymentHistoryForDownload } from "../../function-library/helper-functions/reportsHelperMethods";
 import {
@@ -12,8 +11,6 @@ import SimpleTable from "../table/SimpleTable";
 
 export default observer(function FilterPaymentHistoryContent() {
   const { userAccountStore, paymentStore } = useStore();
-
-  useEffect(() => {}, [paymentStore.paymentHistory, paymentStore]);
 
   const handlePageChange = (index: number) => {
     if (
@@ -35,9 +32,11 @@ export default observer(function FilterPaymentHistoryContent() {
       paymentStore.currentQueryParams &&
       userAccountStore.user
     ) {
+      paymentStore.setPaymentPageSize(size);
       const query = {
         ...paymentStore.currentQueryParams,
         pageSize: +size,
+        pageNumber: 1,
       };
       paymentStore.getPaymentHistory(userAccountStore.user.id, query);
     }

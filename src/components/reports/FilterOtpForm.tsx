@@ -22,7 +22,7 @@ export default observer(function FilterOtpForm() {
           recipientNumber: "",
           startDate: new Date(),
           endDate: new Date(),
-          pageSize: 10,
+          pageSize: reportsStore.otpPageSize,
         }}
         onSubmit={(values, { resetForm }) =>
           reportsStore.getOtpMessages(values.id, {

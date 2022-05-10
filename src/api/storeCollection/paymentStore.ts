@@ -17,6 +17,8 @@ export class PaymentStore {
   totalPaymentPages = 1;
   trxnRef: string | null = window.localStorage.getItem("trxnRef");
 
+  paymentPageSize = 10;
+
   constructor() {
     makeAutoObservable(this);
 
@@ -53,15 +55,18 @@ export class PaymentStore {
   getPaymentHistory = async (id: string, query: QueryParam) => {
     try {
       window.scrollTo(0, 0);
-      this.currentQueryParams = query;
-      const queryString = queryStringBuilder(query);
-
       store.commonStore.setLoading(true);
+      this.currentQueryParams = query;
+      const queryString = queryStringBuilder({
+        ...query,
+        pageSize: this.paymentPageSize,
+      });
+
       const { result } = await agent.Reports.transactions(id, queryString);
 
       this.totalPaymentPages = getNumberOfPages(
         result.totalNumberOfRecords,
-        query.pageSize
+        this.paymentPageSize
       );
 
       runInAction(() => {
@@ -83,8 +88,8 @@ export class PaymentStore {
       result.status === "success"
         ? store.commonStore.setSuccess(
             `Your account was successfully credited with ${NairaFormatter(
-              +result.amount
-            )} ✓`
+              +result.amount / 100
+            )}`
           )
         : store.commonStore.setError(result.gateway_response);
     } catch (error) {
@@ -94,4 +99,6 @@ export class PaymentStore {
       store.commonStore.setLoading(false);
     }
   };
+
+  setPaymentPageSize = (value: number) => (this.paymentPageSize = value);
 }

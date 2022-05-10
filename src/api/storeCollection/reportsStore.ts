@@ -24,6 +24,11 @@ export class ReportsStore {
   totalOtpPages = 1;
   totalTransactionsPages = 1;
 
+  msgPageSize = 10;
+  responsePageSize = 10;
+  otpPageSize = 10;
+  transactionPageSize = 10;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -32,14 +37,17 @@ export class ReportsStore {
     try {
       window.scrollTo(0, 0);
       this.currentQueryParams = query;
-      const queryString = queryStringBuilder(query);
+      const queryString = queryStringBuilder({
+        ...query,
+        pageSize: this.msgPageSize,
+      });
 
       store.commonStore.setLoading(true);
       const { result } = await agent.Reports.smsMessages(id, queryString);
 
       this.totalMsgPages = getNumberOfPages(
         result.totalNumberOfRecords,
-        query.pageSize
+        this.msgPageSize
       );
 
       runInAction(() => {
@@ -56,7 +64,10 @@ export class ReportsStore {
     try {
       window.scrollTo(0, 0);
       this.currentQueryParams = query;
-      const queryString = queryStringBuilder(query);
+      const queryString = queryStringBuilder({
+        ...query,
+        pageSize: this.responsePageSize,
+      });
 
       store.commonStore.setLoading(true);
       const { result } = await agent.Reports.smsMessageResponses(
@@ -66,7 +77,7 @@ export class ReportsStore {
 
       this.totalResponsePages = getNumberOfPages(
         result.totalNumberOfRecords,
-        query.pageSize
+        this.responsePageSize
       );
 
       runInAction(() => {
@@ -83,14 +94,17 @@ export class ReportsStore {
     try {
       window.scrollTo(0, 0);
       this.currentQueryParams = query;
-      const queryString = queryStringBuilder(query);
+      const queryString = queryStringBuilder({
+        ...query,
+        pageSize: this.otpPageSize,
+      });
 
       store.commonStore.setLoading(true);
       const { result } = await agent.Reports.otpMessages(id, queryString);
 
       this.totalOtpPages = getNumberOfPages(
         result.totalNumberOfRecords,
-        query.pageSize
+        this.otpPageSize
       );
 
       runInAction(() => {
@@ -107,14 +121,17 @@ export class ReportsStore {
     try {
       window.scrollTo(0, 0);
       this.currentQueryParams = query;
-      const queryString = queryStringBuilder(query);
+      const queryString = queryStringBuilder({
+        ...query,
+        pageSize: this.transactionPageSize,
+      });
 
       store.commonStore.setLoading(true);
       const { result } = await agent.Reports.transactions(id, queryString);
 
       this.totalTransactionsPages = getNumberOfPages(
         result.totalNumberOfRecords,
-        query.pageSize
+        this.transactionPageSize
       );
 
       runInAction(() => {
@@ -126,4 +143,10 @@ export class ReportsStore {
       store.commonStore.setLoading(false);
     }
   };
+
+  setMsgPageSize = (value: number) => (this.msgPageSize = value);
+  setResponsePageSize = (value: number) => (this.responsePageSize = value);
+  setOtpPageSize = (value: number) => (this.otpPageSize = value);
+  setTransactionPageSize = (value: number) =>
+    (this.transactionPageSize = value);
 }

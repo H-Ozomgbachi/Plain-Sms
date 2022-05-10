@@ -19,6 +19,7 @@ export default observer(function MessagesReport({ campaigns }: Props) {
       <FilterReportForm
         campaigns={campaigns}
         handleSubmit={reportsStore.getSmsMessages}
+        pageSize={reportsStore.msgPageSize}
       />
 
       <FilterMessagesContent />

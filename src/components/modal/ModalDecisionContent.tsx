@@ -15,7 +15,7 @@ export default observer(function ModalDecisionContent({
 
   return (
     <div>
-      <div className="modal-decision-text">You are about {actionName}</div>
+      <div className="modal-decision-text">You are about to {actionName}</div>
 
       <div className="mt-3 d-flex justify-content-center gap-3">
         <button

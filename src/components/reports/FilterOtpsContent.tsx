@@ -1,5 +1,4 @@
 import { observer } from "mobx-react-lite";
-import { useEffect } from "react";
 import { Icon } from "semantic-ui-react";
 import { useStore } from "../../api/main/appStore";
 import { refineOtpsForDownload } from "../../function-library/helper-functions/reportsHelperMethods";
@@ -11,8 +10,6 @@ import PageSizeAndExport from "./PageSizeAndExport";
 
 export default observer(function FilterOtpsContent() {
   const { reportsStore, userAccountStore } = useStore();
-
-  useEffect(() => {}, [reportsStore.otpsReport, reportsStore]);
 
   const handlePageChange = (index: number) => {
     if (
@@ -34,9 +31,11 @@ export default observer(function FilterOtpsContent() {
       reportsStore.currentQueryParams &&
       userAccountStore.user
     ) {
+      reportsStore.setOtpPageSize(size);
       const query = {
         ...reportsStore.currentQueryParams,
         pageSize: +size,
+        pageNumber: 1,
       };
       reportsStore.getOtpMessages(userAccountStore.user.id, query);
     }

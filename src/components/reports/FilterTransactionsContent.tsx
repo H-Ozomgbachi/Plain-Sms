@@ -1,5 +1,4 @@
 import { observer } from "mobx-react-lite";
-import { useEffect } from "react";
 import { useStore } from "../../api/main/appStore";
 import {
   refineTransactionsForDownload,
@@ -16,8 +15,6 @@ import PageSizeAndExport from "./PageSizeAndExport";
 
 export default observer(function FilterTransactionsContent() {
   const { reportsStore, userAccountStore } = useStore();
-
-  useEffect(() => {}, [reportsStore.transactionsReport, reportsStore]);
 
   const handlePageChange = (index: number) => {
     if (
@@ -39,9 +36,11 @@ export default observer(function FilterTransactionsContent() {
       reportsStore.currentQueryParams &&
       userAccountStore.user
     ) {
+      reportsStore.setTransactionPageSize(size);
       const query = {
         ...reportsStore.currentQueryParams,
         pageSize: +size,
+        pageNumber: 1,
       };
       reportsStore.getTransactions(userAccountStore.user.id, query);
     }

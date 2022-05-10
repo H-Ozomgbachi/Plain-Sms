@@ -1,5 +1,4 @@
 import { observer } from "mobx-react-lite";
-import { useEffect } from "react";
 import { useStore } from "../../api/main/appStore";
 import { refineResponseForDownload } from "../../function-library/helper-functions/reportsHelperMethods";
 import { DateOnlyFormat } from "../../function-library/helper-functions/sharedHelperMethods";
@@ -10,8 +9,6 @@ import PageSizeAndExport from "./PageSizeAndExport";
 
 export default observer(function FilterResponsesContent() {
   const { reportsStore, campaignStore } = useStore();
-
-  useEffect(() => {}, [reportsStore.responsesReport, reportsStore]);
 
   const handlePageChange = (index: number) => {
     if (
@@ -32,10 +29,12 @@ export default observer(function FilterResponsesContent() {
       reportsStore.responsesReport.length !== 0 &&
       reportsStore.currentQueryParams
     ) {
+      reportsStore.setResponsePageSize(size);
       const id = reportsStore.responsesReport[0].campaignId;
       const query = {
         ...reportsStore.currentQueryParams,
         pageSize: size,
+        pageNumber: 1,
       };
       reportsStore.getSmsMessageResponses(id, query);
     }

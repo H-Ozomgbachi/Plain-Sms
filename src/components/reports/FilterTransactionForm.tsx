@@ -17,7 +17,7 @@ export default observer(function FilterTransactionForm({
   isOnlyDeposit,
   handleSubmit,
 }: Props) {
-  const { userAccountStore } = useStore();
+  const { userAccountStore, reportsStore } = useStore();
 
   if (userAccountStore.user === null) return <></>;
 
@@ -31,7 +31,7 @@ export default observer(function FilterTransactionForm({
           type: isOnlyDeposit ? "3" : "",
           startDate: new Date(),
           endDate: new Date(),
-          pageSize: 10,
+          pageSize: reportsStore.transactionPageSize,
         }}
         onSubmit={(values, { resetForm }) =>
           handleSubmit(values.id, {

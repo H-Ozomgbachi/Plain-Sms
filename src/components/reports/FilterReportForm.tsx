@@ -11,11 +11,13 @@ import "./FilterReportForm.css";
 interface Props {
   campaigns: CampaignData[];
   handleSubmit: (id: string, query: QueryParam) => void;
+  pageSize: number;
 }
 
 export default observer(function FilterReportForm({
   campaigns,
   handleSubmit,
+  pageSize,
 }: Props) {
   return (
     <div className="filter">
@@ -27,7 +29,7 @@ export default observer(function FilterReportForm({
           recipientNumber: "",
           startDate: new Date(),
           endDate: new Date(),
-          pageSize: 10,
+          pageSize,
         }}
         onSubmit={(values, { resetForm }) =>
           handleSubmit(values.id, {
