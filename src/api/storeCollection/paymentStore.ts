@@ -1,12 +1,13 @@
 import { makeAutoObservable, reaction, runInAction } from "mobx";
+import { customHistory } from "../..";
 import {
+  autoLinkClick,
   getNumberOfPages,
   NairaFormatter,
   queryStringBuilder,
-} from "../../function-library/helper-functions/sharedHelperMethods";
+} from "../../helper-functions/sharedFunctions";
 import agent from "../main/apiAgent";
 import { store } from "../main/appStore";
-import { autoLinkClick } from "../main/coreMethods";
 import { SendPaymentDto } from "../models/payment";
 import { TransactionReport } from "../models/reports";
 import { QueryParam } from "../models/shared";
@@ -97,6 +98,7 @@ export class PaymentStore {
     } finally {
       window.localStorage.removeItem("trxnRef");
       store.commonStore.setLoading(false);
+      customHistory.push("/payments");
     }
   };
 

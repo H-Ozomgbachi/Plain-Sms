@@ -4,7 +4,7 @@ import { Button } from "semantic-ui-react";
 import * as Yup from "yup";
 import { useStore } from "../../api/main/appStore";
 import { QueryParam } from "../../api/models/shared";
-import { toUTCConverter } from "../../function-library/helper-functions/sharedHelperMethods";
+import { toUTCConverter } from "../../helper-functions/sharedFunctions";
 import { CustomSelect, CustomTextInput } from "../forms/custom/CustomInputs";
 import "./FilterReportForm.css";
 

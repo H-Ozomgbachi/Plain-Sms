@@ -8,7 +8,7 @@ export default observer(function CreateCampaign() {
     <div>
       <CustomDefaultTabHeading content="New SMS Campaign" />
 
-      <div className="user-profile-data">
+      <div className="create-campaign-box">
         <CreateCampaignForm />
       </div>
     </div>

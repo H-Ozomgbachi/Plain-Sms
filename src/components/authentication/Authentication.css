@@ -5,7 +5,7 @@
       rgba(112, 111, 211, 0.5),
       rgba(112, 111, 211, 0.5)
     ),
-    url("../../wwwroot/images/sms-marketing-campaign-image.jpg");
+    url("../../static-assets/images/sms-marketing-campaign-image.jpg");
   background-size: cover;
   background-position: 80% 20%;
   background-repeat: no-repeat;

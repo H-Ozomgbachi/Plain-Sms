@@ -6,7 +6,7 @@ import { useState } from "react";
 import { RecipientsWithMessage } from "../../api/models/sms";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../api/main/appStore";
-import { processRecipientWithMessage } from "../../function-library/helper-functions/smsHelperMethods";
+import { processRecipientWithMessage } from "../../helper-functions/smsHelperMethods";
 import { CampaignData } from "../../api/models/campaign";
 import { CustomSelect } from "../forms/custom/CustomInputs";
 
@@ -46,7 +46,7 @@ export default observer(function CreateSmsMany({ campaigns }: Props) {
   };
 
   return (
-    <div className="create-sms-container">
+    <div className="create-sms-container shadow-card">
       <Formik
         initialValues={INITIAL_VALUES}
         onSubmit={async (values, { setErrors, resetForm }) =>

@@ -3,7 +3,6 @@ import { Icon } from "semantic-ui-react";
 import UserCredentials from "../../components/user-credentials/UserCredentials";
 import CustomVerticalTab from "../../components/custom-vertical-tab/CustomVerticalTab";
 import UserProfile from "../../components/user-profile/UserProfile";
-import "../page-specific-styles/MyAccount.css";
 import UserConfiguration from "../../components/user-configuration/UserConfiguration";
 import { useStore } from "../../api/main/appStore";
 import Header from "../../components/header/Header";

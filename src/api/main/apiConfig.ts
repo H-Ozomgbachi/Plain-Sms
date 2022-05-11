@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { customHistory } from "../..";
+import { sleep } from "../../helper-functions/sharedFunctions";
 import { store } from "./appStore";
-import { sleep } from "./coreMethods";
 
 export const apiUrl = "https://plainsms-api.azurewebsites.net/api/v1";
 

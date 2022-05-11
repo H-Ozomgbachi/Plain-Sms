@@ -2,7 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import {
   getNumberOfPages,
   queryStringBuilder,
-} from "../../function-library/helper-functions/sharedHelperMethods";
+} from "../../helper-functions/sharedFunctions";
 import agent from "../main/apiAgent";
 import { store } from "../main/appStore";
 import {

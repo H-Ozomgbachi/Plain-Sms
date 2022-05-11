@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../api/main/appStore";
-import { refineMessagesForDownload } from "../../function-library/helper-functions/reportsHelperMethods";
-import { DateOnlyFormat } from "../../function-library/helper-functions/sharedHelperMethods";
+import { refineMessagesForDownload } from "../../helper-functions/reportsFunctions";
+import { DateOnlyFormat } from "../../helper-functions/sharedFunctions";
 import MyPagination from "../pagination/MyPagination";
 import "./FilterMessagesContent.css";
 import PageSizeAndExport from "./PageSizeAndExport";

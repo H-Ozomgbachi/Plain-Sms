@@ -3,8 +3,8 @@ import {
   OtpReport,
   ResponseReport,
   TransactionReport,
-} from "../../api/models/reports";
-import { DateOnlyFormat } from "./sharedHelperMethods";
+} from "../api/models/reports";
+import { DateOnlyFormat } from "./sharedFunctions";
 
 export function transactionTypeName(transactionCode: number) {
   switch (transactionCode) {
@@ -70,7 +70,7 @@ export function refinePaymentHistoryForDownload(data: TransactionReport[]) {
     return {
       Date: DateOnlyFormat(el.createdUTC),
       Amount: el.amount,
-      "Transaction Id": el.id,
+      "Transaction id": el.id,
     };
   });
 }

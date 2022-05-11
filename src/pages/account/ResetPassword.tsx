@@ -2,9 +2,9 @@ import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import { observer } from "mobx-react-lite";
 import { Authentication } from "../../components/authentication/Authentication";
-import MyTextInput from "../../components/inputs/MyTextInput";
 import { Button } from "semantic-ui-react";
 import { useStore } from "../../api/main/appStore";
+import { CustomTextInput } from "../../components/forms/custom/CustomInputs";
 
 export default observer(function ResetPassword() {
   const { userAccountStore } = useStore();
@@ -34,14 +34,14 @@ export default observer(function ResetPassword() {
             })}
           >
             {({ handleSubmit, isSubmitting, isValid, dirty }) => (
-              <Form className="ui form">
-                <MyTextInput
+              <Form>
+                <CustomTextInput
                   name="password"
                   placeholder="Enter new password"
                   label="New password"
                   type="password"
                 />
-                <MyTextInput
+                <CustomTextInput
                   name="confirmPassword"
                   placeholder="Re-enter new password"
                   label="Confirm new password"

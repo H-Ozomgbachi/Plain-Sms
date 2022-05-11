@@ -6,9 +6,9 @@ import { useState } from "react";
 import { RecipientsOnly } from "../../api/models/sms";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../api/main/appStore";
-import { processRecipientsArray } from "../../function-library/helper-functions/smsHelperMethods";
+import { processRecipientsArray } from "../../helper-functions/smsHelperMethods";
 import { CampaignData } from "../../api/models/campaign";
-import { toUTCConverter } from "../../function-library/helper-functions/sharedHelperMethods";
+import { toUTCConverter } from "../../helper-functions/sharedFunctions";
 import {
   CustomSelect,
   CustomTextArea,
@@ -50,7 +50,7 @@ export default observer(function CreateSmsOne({ campaigns }: Props) {
   };
 
   return (
-    <div className="create-sms-container">
+    <div className="create-sms-container shadow-card">
       <Formik
         initialValues={INITIAL_VALUES}
         onSubmit={async (values, { setErrors, resetForm }) =>

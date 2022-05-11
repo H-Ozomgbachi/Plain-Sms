@@ -1,17 +1,31 @@
-import { QueryParam } from "../../api/models/shared";
+import { QueryParam } from "../api/models/shared";
 import moment from "moment";
+
+export const sleep = (delay: number) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, delay);
+  });
+};
+
+export const autoLinkClick = (href: string) => {
+  const link = document.createElement("a");
+  link.href = href;
+  link.target = "_self";
+  document.body.appendChild(link);
+  link.click();
+};
 
 export const queryStringBuilder = (query: QueryParam) => {
   const obj = query as any;
 
-  const x = Object.entries(obj).map((el) => {
+  const queryParameters = Object.entries(obj).map((el) => {
     if (el[1] !== "" && el[0] !== "id") {
       return `${el[0]}=${el[1]}`;
     } else {
       return "";
     }
   });
-  return x.filter((el) => el !== "").join("&");
+  return queryParameters.filter((el) => el !== "").join("&");
 };
 
 export function DateOnlyFormat(dateString: string) {

@@ -1,10 +1,10 @@
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../api/main/appStore";
-import { refinePaymentHistoryForDownload } from "../../function-library/helper-functions/reportsHelperMethods";
+import { refinePaymentHistoryForDownload } from "../../helper-functions/reportsFunctions";
 import {
   DateOnlyFormat,
   NairaFormatter,
-} from "../../function-library/helper-functions/sharedHelperMethods";
+} from "../../helper-functions/sharedFunctions";
 import MyPagination from "../pagination/MyPagination";
 import PageSizeAndExport from "../reports/PageSizeAndExport";
 import SimpleTable from "../table/SimpleTable";

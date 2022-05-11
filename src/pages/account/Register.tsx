@@ -5,8 +5,11 @@ import { Button } from "semantic-ui-react";
 import * as Yup from "yup";
 import { useStore } from "../../api/main/appStore";
 import { Authentication } from "../../components/authentication/Authentication";
-import MySelectInput from "../../components/inputs/MySelectInput";
-import MyTextInput from "../../components/inputs/MyTextInput";
+import {
+  CustomPasswordInput,
+  CustomSelect,
+  CustomTextInput,
+} from "../../components/forms/custom/CustomInputs";
 import { CountryCodeOptions } from "../../local-data/CountryCodeOptions";
 import "../page-specific-styles/Register.css";
 
@@ -44,8 +47,8 @@ export default observer(function Register() {
             })}
           >
             {({ handleSubmit, isSubmitting, isValid, dirty }) => (
-              <Form className="ui form">
-                <MyTextInput
+              <Form>
+                <CustomTextInput
                   name="firstName"
                   placeholder="Enter first name"
                   label="First Name"
@@ -53,7 +56,7 @@ export default observer(function Register() {
                     userAccountStore.setAuthenticationErrorMessage(null)
                   }
                 />
-                <MyTextInput
+                <CustomTextInput
                   name="lastName"
                   placeholder="Enter last name"
                   label="Last Name"
@@ -62,16 +65,17 @@ export default observer(function Register() {
                   }
                 />
 
-                <MyTextInput
+                <CustomTextInput
                   name="email"
                   placeholder="Enter your email"
                   label="Email"
+                  type="email"
                   onFocus={() =>
                     userAccountStore.setAuthenticationErrorMessage(null)
                   }
                 />
 
-                <MyTextInput
+                <CustomPasswordInput
                   name="password"
                   placeholder="Enter your password"
                   label="Password"
@@ -80,21 +84,30 @@ export default observer(function Register() {
                   }
                 />
 
-                <>
-                  <span className="input-text-label">Telephone</span>
-                  <div className="d-flex mb-2">
-                    <div className="">
-                      <MySelectInput
-                        name="countryCode"
-                        options={CountryCodeOptions}
-                        placeholder="Country Code"
-                      />
-                    </div>
-                    <div className=" flex-grow-1">
-                      <MyTextInput name="phone" type="tel" />
-                    </div>
+                <div className="d-flex mb-2">
+                  <CustomSelect
+                    name="countryCode"
+                    label="Code"
+                    children={
+                      <>
+                        {CountryCodeOptions.map((el) => {
+                          return (
+                            <option value={el.value} key={el.value}>
+                              {el.text}
+                            </option>
+                          );
+                        })}
+                      </>
+                    }
+                  />
+                  <div className="flex-grow-1">
+                    <CustomTextInput
+                      name="phone"
+                      type="tel"
+                      label="Telephone"
+                    />
                   </div>
-                </>
+                </div>
 
                 <Button
                   loading={isSubmitting}

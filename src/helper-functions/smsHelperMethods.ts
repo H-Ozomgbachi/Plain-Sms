@@ -1,5 +1,5 @@
-import { RecipientsOnly, RecipientsWithMessage } from "../../api/models/sms";
-import { toUTCConverter } from "./sharedHelperMethods";
+import { RecipientsOnly, RecipientsWithMessage } from "../api/models/sms";
+import { toUTCConverter } from "./sharedFunctions";
 
 export const processRecipientsArray = (e: RecipientsOnly[]) => {
   return e.map((r) => r.recipients);

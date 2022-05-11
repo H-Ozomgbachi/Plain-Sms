@@ -4,9 +4,12 @@ import * as Yup from "yup";
 import { Button } from "semantic-ui-react";
 import CustomDefaultTabHeading from "../headings/CustomDefaultTabHeading";
 import "./UserConfiguration.css";
-import MyTextInput from "../inputs/MyTextInput";
 import { ConfigurationData } from "../../api/models/userAccount";
 import { useStore } from "../../api/main/appStore";
+import {
+  CustomCheckboxInput,
+  CustomTextInput,
+} from "../forms/custom/CustomInputs";
 
 interface Props {
   config: ConfigurationData | null;
@@ -45,57 +48,56 @@ export default observer(function UserConfiguration({ config }: Props) {
           })}
         >
           {({ handleSubmit, isSubmitting, isValid, dirty, values }) => (
-            <Form className="ui form">
-              <MyTextInput
+            <Form>
+              <CustomTextInput
                 name="countryCode"
                 placeholder="Enter Country Code"
                 label="Country Code :"
                 disabled
               />
-              <MyTextInput
+              <CustomTextInput
                 name="smsUnitPrice"
                 placeholder="Enter SMS Unit Price :"
                 label="Unit Price (₦)"
                 disabled
               />
 
-              <MyTextInput
+              <CustomTextInput
                 name="smsIntlUnitPrice"
                 placeholder="Enter Intl. Unit Price"
                 label="International Unit Price (₦)"
                 disabled
               />
-              <MyTextInput
+              <CustomTextInput
                 name="whatsappUnitPrice"
                 placeholder="Enter WhatsApp Unit Price"
                 label="WhatsApp Unit Price [COMING SOON]"
                 disabled
               />
-              <MyTextInput
+              <CustomTextInput
                 name="otpUnitPrice"
                 placeholder="Enter OTP Unit Price"
                 label="OTP Unit Price (₦)"
                 disabled
               />
-              <MyTextInput
+              <CustomTextInput
                 name="otpIntlUnitPrice"
                 placeholder="Enter OTP Intl. Unit Price"
                 label="OTP International Unit Price (₦)"
                 disabled
               />
-              <MyTextInput
+              <CustomTextInput
                 name="otpLength"
                 placeholder="Enter OTP Length"
                 label="OTP Length :"
                 type="number"
               />
-              <MyTextInput
+              <CustomCheckboxInput
                 name="otpIsAlphaNumeric"
-                type="checkbox"
                 label="Alphanumeric OTP"
                 checked={values.otpIsAlphaNumeric}
               />
-              <MyTextInput
+              <CustomTextInput
                 name="otpMessageTemplate"
                 placeholder="Enter OTP Message Template"
                 label="OTP Message Template :"

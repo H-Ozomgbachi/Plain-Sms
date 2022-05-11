@@ -1,6 +1,7 @@
 import "./CustomInputs.css";
 import { useField } from "formik";
 import { useState } from "react";
+import { Icon } from "semantic-ui-react";
 
 interface Props {
   children?: JSX.Element;
@@ -13,6 +14,7 @@ interface Props {
   disabled?: boolean;
   checked?: boolean;
   required?: boolean;
+  onFocus?: () => void;
 }
 
 export const CustomTextInput = (props: Props) => {
@@ -24,7 +26,12 @@ export const CustomTextInput = (props: Props) => {
         {props.required ? <span className="text-danger">*</span> : null}
       </label>
 
-      <input className={`text-input`} {...field} {...props} />
+      <input
+        className={`text-input`}
+        {...field}
+        {...props}
+        onFocus={props.onFocus}
+      />
       {meta.touched && meta.error ? (
         <div className="input-text-error">{meta.error}</div>
       ) : null}
@@ -41,7 +48,13 @@ export const CustomTextArea = (props: Props) => {
         {props.required ? <span className="text-danger">*</span> : null}
       </label>
 
-      <textarea rows={8} className={`text-input`} {...field} {...props} />
+      <textarea
+        rows={8}
+        className={`text-area`}
+        {...field}
+        {...props}
+        onFocus={props.onFocus}
+      />
       {meta.touched && meta.error ? (
         <div className="input-text-error">{meta.error}</div>
       ) : null}
@@ -88,6 +101,44 @@ export const CustomTextInputWithButton = (props: Props) => {
           }}
         >
           {btnTitle}
+        </button>
+      </div>
+      {meta.touched && meta.error ? (
+        <div className="input-text-error">{meta.error}</div>
+      ) : null}
+    </div>
+  );
+};
+
+export const CustomCheckboxInput = (props: Props) => {
+  const [field] = useField(props);
+  return (
+    <div className="checkbox-style">
+      <input {...field} {...props} onFocus={props.onFocus} type="checkbox" />{" "}
+      <label>{props.label}</label>
+    </div>
+  );
+};
+
+export const CustomPasswordInput = (props: Props) => {
+  const [field, meta] = useField(props);
+  const [isVisible, setIsVisible] = useState(false);
+  return (
+    <div className="mb-2">
+      <label className="input-label">{props.label}</label>
+      <div className="input-with-btn-box">
+        <input
+          className={`text-input-with-btn`}
+          {...field}
+          {...props}
+          type={isVisible ? "text" : "password"}
+        />
+        <button
+          className={`input-btn`}
+          type="button"
+          onClick={(e) => setIsVisible(!isVisible)}
+        >
+          {isVisible ? <Icon name="eye slash" /> : <Icon name="eye" />}
         </button>
       </div>
       {meta.touched && meta.error ? (

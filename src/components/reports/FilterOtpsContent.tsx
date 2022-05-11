@@ -1,8 +1,8 @@
 import { observer } from "mobx-react-lite";
 import { Icon } from "semantic-ui-react";
 import { useStore } from "../../api/main/appStore";
-import { refineOtpsForDownload } from "../../function-library/helper-functions/reportsHelperMethods";
-import { DateOnlyFormat } from "../../function-library/helper-functions/sharedHelperMethods";
+import { refineOtpsForDownload } from "../../helper-functions/reportsFunctions";
+import { DateOnlyFormat } from "../../helper-functions/sharedFunctions";
 import MyPagination from "../pagination/MyPagination";
 import SimpleTable from "../table/SimpleTable";
 import "./FilterMessagesContent.css";

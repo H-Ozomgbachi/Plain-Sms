@@ -5,7 +5,7 @@ import { Button } from "semantic-ui-react";
 import * as Yup from "yup";
 import { useStore } from "../../api/main/appStore";
 import { Authentication } from "../../components/authentication/Authentication";
-import MyTextInput from "../../components/inputs/MyTextInput";
+import { CustomTextInput } from "../../components/forms/custom/CustomInputs";
 
 export default observer(function ForgotPassword() {
   const { userAccountStore } = useStore();
@@ -29,11 +29,12 @@ export default observer(function ForgotPassword() {
             })}
           >
             {({ handleSubmit, isSubmitting, isValid, dirty }) => (
-              <Form className="ui form">
-                <MyTextInput
+              <Form>
+                <CustomTextInput
                   name="email"
                   placeholder="Enter your email address"
                   label="Enter your email address"
+                  type="email"
                 />
 
                 <Button

@@ -4,9 +4,9 @@ import { Button } from "semantic-ui-react";
 import * as Yup from "yup";
 import { useStore } from "../../api/main/appStore";
 import { UserData } from "../../api/models/userAccount";
-import { NairaFormatter } from "../../function-library/helper-functions/sharedHelperMethods";
+import { NairaFormatter } from "../../helper-functions/sharedFunctions";
+import { CustomTextInput } from "../forms/custom/CustomInputs";
 import CustomDefaultTabHeading from "../headings/CustomDefaultTabHeading";
-import MyTextInput from "../inputs/MyTextInput";
 import "./UserProfile.css";
 
 interface Props {
@@ -47,33 +47,35 @@ export default observer(function UserProfile({ user }: Props) {
           })}
         >
           {({ handleSubmit, isSubmitting, isValid, dirty }) => (
-            <Form className="ui form">
-              <MyTextInput
+            <Form>
+              <CustomTextInput
                 name="firstName"
                 placeholder="Enter first name"
                 label="First Name"
               />
-              <MyTextInput
+              <CustomTextInput
                 name="lastName"
                 placeholder="Enter last name"
                 label="Last Name"
               />
 
-              <MyTextInput
+              <CustomTextInput
                 name="email"
                 placeholder="Enter your email"
                 label="Email"
+                type="email"
                 disabled
               />
-              <MyTextInput
+              <CustomTextInput
                 name="countryCode"
                 placeholder="Enter country code"
                 label="Country Code"
               />
-              <MyTextInput
+              <CustomTextInput
                 name="phone"
                 placeholder="Enter your phone number"
                 label="Phone"
+                type="tel"
               />
 
               <Button

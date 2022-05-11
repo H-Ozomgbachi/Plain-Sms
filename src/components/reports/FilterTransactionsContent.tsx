@@ -3,11 +3,11 @@ import { useStore } from "../../api/main/appStore";
 import {
   refineTransactionsForDownload,
   transactionTypeName,
-} from "../../function-library/helper-functions/reportsHelperMethods";
+} from "../../helper-functions/reportsFunctions";
 import {
   DateOnlyFormat,
   NairaFormatter,
-} from "../../function-library/helper-functions/sharedHelperMethods";
+} from "../../helper-functions/sharedFunctions";
 import MyPagination from "../pagination/MyPagination";
 import SimpleTable from "../table/SimpleTable";
 import "./FilterMessagesContent.css";

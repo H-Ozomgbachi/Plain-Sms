@@ -8,7 +8,10 @@ import {
   Authentication,
   AuthenticationError,
 } from "../../components/authentication/Authentication";
-import MyTextInput from "../../components/inputs/MyTextInput";
+import {
+  CustomPasswordInput,
+  CustomTextInput,
+} from "../../components/forms/custom/CustomInputs";
 import "../page-specific-styles/Login.css";
 
 export default observer(function Login() {
@@ -41,18 +44,18 @@ export default observer(function Login() {
             })}
           >
             {({ handleSubmit, isSubmitting, isValid, dirty }) => (
-              <Form className="ui form">
-                <MyTextInput
+              <Form>
+                <CustomTextInput
                   name="username"
                   placeholder="Enter username"
+                  type="email"
                   label="Username"
                   onFocus={() =>
                     userAccountStore.setAuthenticationErrorMessage(null)
                   }
                 />
-                <MyTextInput
+                <CustomPasswordInput
                   name="password"
-                  type="password"
                   placeholder="Enter your password"
                   label="Password"
                   onFocus={() =>

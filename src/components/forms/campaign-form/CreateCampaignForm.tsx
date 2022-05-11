@@ -1,10 +1,10 @@
 import { Form, Formik } from "formik";
 import { Button } from "semantic-ui-react";
 import { useStore } from "../../../api/main/appStore";
-import MyTextInput from "../../inputs/MyTextInput";
 import * as Yup from "yup";
 import { CampaignData } from "../../../api/models/campaign";
 import { observer } from "mobx-react-lite";
+import { CustomTextInput } from "../custom/CustomInputs";
 
 interface Props {
   currentData?: CampaignData;
@@ -46,12 +46,12 @@ export default observer(function CreateCampaignForm({
       >
         {({ handleSubmit, isSubmitting, isValid, dirty }) => (
           <Form className="ui form">
-            <MyTextInput
+            <CustomTextInput
               name="name"
               placeholder="Enter campaign name"
               label="Campaign Name"
             />
-            <MyTextInput
+            <CustomTextInput
               name="callbackUrl"
               placeholder="Enter url"
               label="Callback Url"
@@ -59,7 +59,7 @@ export default observer(function CreateCampaignForm({
 
             <Button
               loading={isSubmitting}
-              content={currentData ? "Update Campaign" : "Create New Campaign"}
+              content={currentData ? "Modify" : "Create"}
               icon="pencil"
               color="vk"
               type="submit"
