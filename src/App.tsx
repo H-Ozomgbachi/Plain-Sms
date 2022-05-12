@@ -5,7 +5,7 @@ import { useStore } from "./api/main/appStore";
 import "./App.css";
 import ErrorDisplay from "./components/error-display/ErrorDisplay";
 import LoadingComponent from "./components/loading-spinner/LoadingComponent";
-import CampaignById from "./pages/campaigns/CampaignById";
+import CampaignById from "./pages/campaigns/SingleCampaign";
 import Campaigns from "./pages/campaigns/Campaigns";
 import Login from "./pages/account/Login";
 import Register from "./pages/account/Register";
@@ -19,6 +19,7 @@ import Sms from "./pages/sms/Sms";
 import { RedirectTo } from "./api/models/shared";
 import Payment from "./pages/payments/Payment";
 import MyModal from "./components/modal/MyModal";
+import NotFound from "./components/not-found/NotFound";
 
 export default observer(function App() {
   const { commonStore, userAccountStore } = useStore();
@@ -81,8 +82,7 @@ export default observer(function App() {
               <Route index element={<Payment />} />
             </Route>
 
-            <Route path="server-error" />
-            <Route path="*" element={<h1>Not Found Page</h1>} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
       </div>

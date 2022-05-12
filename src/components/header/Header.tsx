@@ -2,31 +2,8 @@ import { observer } from "mobx-react-lite";
 import { Link, NavLink } from "react-router-dom";
 import { Icon } from "semantic-ui-react";
 import { useStore } from "../../api/main/appStore";
+import { headerLinksData } from "../../local-data/headerLinksData";
 import "./Header.css";
-
-const data = [
-  {
-    to: "/campaigns",
-    text: "Campaigns",
-  },
-
-  {
-    to: "/payments",
-    text: "Payments",
-  },
-  {
-    to: "/sms",
-    text: "Sms",
-  },
-  {
-    to: "/reports",
-    text: "Reports",
-  },
-  {
-    to: "/account",
-    text: "Account",
-  },
-];
 
 export default observer(function Header() {
   const { commonStore } = useStore();
@@ -37,7 +14,7 @@ export default observer(function Header() {
         <span className="logo-text">Plain Sms</span>
       </Link>
       <div className="header-links-box">
-        {data.map((el, index) => (
+        {headerLinksData.map((el, index) => (
           <NavLink
             key={index}
             to={el.to}

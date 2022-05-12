@@ -4,20 +4,20 @@ import { Link } from "react-router-dom";
 import { Button } from "semantic-ui-react";
 import * as Yup from "yup";
 import { useStore } from "../../api/main/appStore";
-import { Authentication } from "../../components/authentication/Authentication";
+import { AuthenticationBackground } from "../../components/account/AuthenticationBackground";
 import {
   CustomPasswordInput,
   CustomSelect,
   CustomTextInput,
 } from "../../components/forms/custom/CustomInputs";
 import { CountryCodeOptions } from "../../local-data/CountryCodeOptions";
-import "../page-specific-styles/Register.css";
+import "../../components/account/Register.css";
 
 export default observer(function Register() {
   const { userAccountStore } = useStore();
 
   return (
-    <Authentication>
+    <AuthenticationBackground>
       <div className="register-form-container">
         <h2>Get Started</h2>
         <p>
@@ -120,6 +120,6 @@ export default observer(function Register() {
           </Formik>
         </div>
       </div>
-    </Authentication>
+    </AuthenticationBackground>
   );
 });

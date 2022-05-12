@@ -49,18 +49,10 @@ export default observer(function UserCredentials({ creds }: Props) {
 
               <div className="d-flex mt-3">
                 <Button
-                  loading={isSubmitting}
-                  content="Edit Credentials"
-                  type="submit"
-                  className=""
-                  size="tiny"
-                  color="vk"
-                  icon="edit"
-                />
-                <Button
                   type="button"
                   content="Reset Credentials"
-                  size="tiny"
+                  className="official-form-btn"
+                  color="vk"
                   icon="sync alternate"
                   onClick={() =>
                     commonStore.setModalContent(

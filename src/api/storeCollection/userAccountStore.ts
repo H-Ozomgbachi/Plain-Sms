@@ -191,7 +191,7 @@ export class UserAccountStore {
 
       if (statusCode === 200) {
         this.getCredentials(id);
-        store.commonStore.setSuccess("Credentials successfully updated");
+        store.commonStore.setSuccess("Credential Reset was Successful ✓");
       }
     } catch (error) {
       throw error;

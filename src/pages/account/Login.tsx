@@ -5,20 +5,20 @@ import { Button } from "semantic-ui-react";
 import * as Yup from "yup";
 import { useStore } from "../../api/main/appStore";
 import {
-  Authentication,
+  AuthenticationBackground,
   AuthenticationError,
-} from "../../components/authentication/Authentication";
+} from "../../components/account/AuthenticationBackground";
 import {
   CustomPasswordInput,
   CustomTextInput,
 } from "../../components/forms/custom/CustomInputs";
-import "../page-specific-styles/Login.css";
+import "../../components/account/Login.css";
 
 export default observer(function Login() {
   const { userAccountStore } = useStore();
 
   return (
-    <Authentication>
+    <AuthenticationBackground>
       <div className="login-form-container shadow-lg">
         {userAccountStore.authenticationErrorMessage ? (
           <AuthenticationError
@@ -88,6 +88,6 @@ export default observer(function Login() {
           </div>
         </div>
       </div>
-    </Authentication>
+    </AuthenticationBackground>
   );
 });

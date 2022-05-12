@@ -1,7 +1,7 @@
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import { observer } from "mobx-react-lite";
-import { Authentication } from "../../components/authentication/Authentication";
+import { AuthenticationBackground } from "../../components/account/AuthenticationBackground";
 import { Button } from "semantic-ui-react";
 import { useStore } from "../../api/main/appStore";
 import { CustomTextInput } from "../../components/forms/custom/CustomInputs";
@@ -10,7 +10,7 @@ export default observer(function ResetPassword() {
   const { userAccountStore } = useStore();
 
   return (
-    <Authentication>
+    <AuthenticationBackground>
       <div className="login-form-container shadow-lg">
         <h2>Reset password</h2>
 
@@ -59,6 +59,6 @@ export default observer(function ResetPassword() {
           </Formik>
         </div>
       </div>
-    </Authentication>
+    </AuthenticationBackground>
   );
 });
