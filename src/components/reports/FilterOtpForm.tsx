@@ -3,8 +3,14 @@ import { observer } from "mobx-react-lite";
 import { Button } from "semantic-ui-react";
 import * as Yup from "yup";
 import { useStore } from "../../api/main/appStore";
-import { toUTCConverter } from "../../helper-functions/sharedFunctions";
-import { CustomTextInput } from "../forms/custom/CustomInputs";
+import {
+  addMonths,
+  toUTCConverter,
+} from "../../helper-functions/sharedFunctions";
+import {
+  CustomDatePicker,
+  CustomTextInput,
+} from "../forms/custom/CustomInputs";
 import "./FilterReportForm.css";
 
 export default observer(function FilterOtpForm() {
@@ -20,8 +26,8 @@ export default observer(function FilterOtpForm() {
           pageNumber: 1,
           code: "",
           recipientNumber: "",
-          startDate: new Date(),
-          endDate: new Date(),
+          startDate: addMonths(-1),
+          endDate: addMonths(0),
           pageSize: reportsStore.otpPageSize,
         }}
         onSubmit={(values, { resetForm }) =>
@@ -38,26 +44,24 @@ export default observer(function FilterOtpForm() {
       >
         {({ isSubmitting }) => (
           <Form>
-            <div className="filter-form-container">
-              <div>
-                <CustomTextInput
+            <div className="row">
+              <div className="col-md-4">
+                <CustomDatePicker
                   name="startDate"
                   label="Start Date"
-                  type="datetime-local"
                   placeholder="End start date"
                   required
                 />
               </div>
-              <div>
-                <CustomTextInput
+              <div className="col-md-4">
+                <CustomDatePicker
                   name="endDate"
                   label="End Date"
-                  type="datetime-local"
                   placeholder="Enter end date"
                   required
                 />
               </div>
-              <div>
+              <div className="col-md-4">
                 <CustomTextInput
                   name="recipientNumber"
                   label="Recipient no."

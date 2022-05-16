@@ -4,8 +4,15 @@ import { Button } from "semantic-ui-react";
 import * as Yup from "yup";
 import { CampaignData } from "../../api/models/campaign";
 import { QueryParam } from "../../api/models/shared";
-import { toUTCConverter } from "../../helper-functions/sharedFunctions";
-import { CustomSelect, CustomTextInput } from "../forms/custom/CustomInputs";
+import {
+  addMonths,
+  toUTCConverter,
+} from "../../helper-functions/sharedFunctions";
+import {
+  CustomDatePicker,
+  CustomSelect,
+  CustomTextInput,
+} from "../forms/custom/CustomInputs";
 import "./FilterReportForm.css";
 
 interface Props {
@@ -27,8 +34,8 @@ export default observer(function FilterReportForm({
           pageNumber: 1,
           code: "",
           recipientNumber: "",
-          startDate: new Date(),
-          endDate: new Date(),
+          startDate: addMonths(-1),
+          endDate: addMonths(0),
           pageSize,
         }}
         onSubmit={(values, { resetForm }) =>
@@ -40,14 +47,14 @@ export default observer(function FilterReportForm({
         }
         validationSchema={Yup.object({
           id: Yup.string().required("This field is required"),
-          startDate: Yup.string().required("This field is required"),
-          endDate: Yup.string().required("This field is required"),
+          startDate: Yup.date().typeError("This field is required"),
+          endDate: Yup.date().required("This field is required"),
         })}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, values, setFieldValue }) => (
           <Form>
-            <div className="filter-form-container">
-              <div>
+            <div className="row">
+              <div className="col-md-3">
                 <CustomSelect
                   name="id"
                   label="Campaign"
@@ -67,25 +74,21 @@ export default observer(function FilterReportForm({
                   required
                 />
               </div>
-              <div>
-                <CustomTextInput
+              <div className="col-md-3">
+                <CustomDatePicker
                   name="startDate"
                   label="Start Date"
-                  type="datetime-local"
                   placeholder="Enter start date"
-                  required
                 />
               </div>
-              <div>
-                <CustomTextInput
+              <div className="col-md-3">
+                <CustomDatePicker
                   name="endDate"
                   label="End Date"
-                  type="datetime-local"
                   placeholder="Enter end date"
-                  required
                 />
               </div>
-              <div>
+              <div className="col-md-3">
                 <CustomTextInput
                   name="recipientNumber"
                   label="Recipient no."

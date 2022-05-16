@@ -23,14 +23,18 @@ export default observer(function AllCampaigns() {
         titles={["Name", "Url", ""]}
         data={campaignStore.campaigns}
         tableBodyBuilder={(el) => (
-          <tr
-            key={el.id}
-            onClick={() => customHistory.push(`/campaigns/${el.uniqueId}`)}
-            className="pointer-cursor"
-          >
-            <td>{el.name}</td>
-            <td>{el.callbackUrl}</td>
+          <tr key={el.id} className="pointer-cursor">
             <td>
+              <span
+                onClick={() => customHistory.push(`/campaigns/${el.uniqueId}`)}
+                className="d-block"
+              >
+                {el.name}
+              </span>
+              <span className="under-data">{el.uniqueId}</span>
+            </td>
+            <td>{el.callbackUrl}</td>
+            <td onClick={() => customHistory.push(`/campaigns/${el.uniqueId}`)}>
               <Icon name="edit" />
             </td>
           </tr>

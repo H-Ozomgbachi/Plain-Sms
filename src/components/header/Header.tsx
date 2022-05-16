@@ -26,7 +26,6 @@ export default observer(function Header() {
           </NavLink>
         ))}
       </div>
-
       <div
         className="drawer-nav-bar pointer-cursor"
         onClick={() => commonStore.setDrawerVisible(true)}

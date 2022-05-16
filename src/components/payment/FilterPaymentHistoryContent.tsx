@@ -1,6 +1,10 @@
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../api/main/appStore";
-import { refinePaymentHistoryForDownload } from "../../helper-functions/reportsFunctions";
+import {
+  paymentStatus,
+  paymentStatusClass,
+  refinePaymentHistoryForDownload,
+} from "../../helper-functions/reportsFunctions";
 import {
   DateOnlyFormat,
   NairaFormatter,
@@ -52,13 +56,16 @@ export default observer(function FilterPaymentHistoryContent() {
         handlePageSizeChange={handlePageSizeChange}
       />
       <SimpleTable
-        titles={["Date", "Amount", "transaction id"]}
+        titles={["Date", "Amount", "transaction id", "Status"]}
         data={paymentStore.paymentHistory}
         tableBodyBuilder={(el) => (
           <tr key={el.id}>
             <td>{DateOnlyFormat(el.createdUTC)}</td>
             <td>{NairaFormatter(el.amount)}</td>
             <td>{el.id}</td>
+            <td className={paymentStatusClass(el.status)}>
+              {paymentStatus(el.status)}
+            </td>
           </tr>
         )}
       />

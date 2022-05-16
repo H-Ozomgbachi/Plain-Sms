@@ -1,4 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import "react-datepicker/dist/react-datepicker.css";
 import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history";
 import { unstable_HistoryRouter as BrowserRouter } from "react-router-dom";

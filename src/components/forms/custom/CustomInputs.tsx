@@ -1,7 +1,8 @@
 import "./CustomInputs.css";
-import { useField } from "formik";
+import { useField, useFormikContext } from "formik";
 import { useState } from "react";
 import { Icon } from "semantic-ui-react";
+import ReactDatePicker from "react-datepicker";
 
 interface Props {
   children?: JSX.Element;
@@ -141,6 +142,33 @@ export const CustomPasswordInput = (props: Props) => {
           {isVisible ? <Icon name="eye slash" /> : <Icon name="eye" />}
         </button>
       </div>
+      {meta.touched && meta.error ? (
+        <div className="input-text-error">{meta.error}</div>
+      ) : null}
+    </div>
+  );
+};
+
+export const CustomDatePicker = (props: Props) => {
+  const [field, meta] = useField(props);
+  const formikProps = useFormikContext();
+  return (
+    <div className="mb-2">
+      <label className="input-label">
+        {props.label}{" "}
+        {props.required ? <span className="text-danger">*</span> : null}
+      </label>
+
+      <ReactDatePicker
+        className={`text-input`}
+        selected={field.value}
+        onChange={(e) => formikProps.setFieldValue(props.name, e)}
+        placeholderText={props.placeholder}
+        dateFormat="MMMM d, yyyy h:mm aa"
+        name={props.name}
+        showTimeInput
+      />
+
       {meta.touched && meta.error ? (
         <div className="input-text-error">{meta.error}</div>
       ) : null}

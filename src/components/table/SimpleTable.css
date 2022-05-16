@@ -4,7 +4,6 @@
   font-variant: small-caps;
   font-size: 1.2rem;
   white-space: nowrap;
-  text-align: center;
 }
 
 .simple-table-container {
@@ -17,4 +16,12 @@
 
 tbody {
   white-space: nowrap;
+}
+
+.under-data {
+  display: block;
+  color: #777;
+  opacity: 0.6;
+  font-size: 0.8rem;
+  margin-top: 5px;
 }

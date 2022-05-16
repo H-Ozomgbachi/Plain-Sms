@@ -10,9 +10,9 @@ import { processRecipientsArray } from "../../helper-functions/smsHelperMethods"
 import { CampaignData } from "../../api/models/campaign";
 import { toUTCConverter } from "../../helper-functions/sharedFunctions";
 import {
+  CustomDatePicker,
   CustomSelect,
   CustomTextArea,
-  CustomTextInput,
 } from "../forms/custom/CustomInputs";
 
 interface Props {
@@ -70,7 +70,7 @@ export default observer(function CreateSmsOne({ campaigns }: Props) {
         })}
       >
         {({ handleSubmit, isSubmitting, isValid, dirty, values }) => (
-          <Form className="">
+          <Form>
             <CustomSelect
               name="campaignId"
               label="Select Campaign"
@@ -135,10 +135,10 @@ export default observer(function CreateSmsOne({ campaigns }: Props) {
               required
             />
 
-            <CustomTextInput
+            <CustomDatePicker
               name="schduleDateUTC"
               label="Schedule Date"
-              type="datetime-local"
+              placeholder="Enter sms schedule date"
             />
 
             <Button

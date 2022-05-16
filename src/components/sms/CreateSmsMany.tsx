@@ -23,7 +23,6 @@ export default observer(function CreateSmsMany({ campaigns }: Props) {
   const INITIAL_VALUES = {
     campaignId: "",
     sender: "",
-    schduleDateUTC: new Date(),
     priority: 0,
   };
 

@@ -24,9 +24,7 @@ export default function SimpleTable<T>({
           </tr>
         </thead>
 
-        <tbody className="border-top-0 text-center">
-          {data.map(tableBodyBuilder)}
-        </tbody>
+        <tbody className="border-top-0">{data.map(tableBodyBuilder)}</tbody>
       </table>
     </div>
   );

@@ -4,8 +4,15 @@ import { Button } from "semantic-ui-react";
 import * as Yup from "yup";
 import { useStore } from "../../api/main/appStore";
 import { QueryParam } from "../../api/models/shared";
-import { toUTCConverter } from "../../helper-functions/sharedFunctions";
-import { CustomSelect, CustomTextInput } from "../forms/custom/CustomInputs";
+import {
+  addMonths,
+  toUTCConverter,
+} from "../../helper-functions/sharedFunctions";
+import {
+  CustomDatePicker,
+  CustomSelect,
+  CustomTextInput,
+} from "../forms/custom/CustomInputs";
 import "./FilterReportForm.css";
 
 interface Props {
@@ -29,8 +36,8 @@ export default observer(function FilterTransactionForm({
           pageNumber: 1,
           transactionId: "",
           type: isOnlyDeposit ? "3" : "",
-          startDate: new Date(),
-          endDate: new Date(),
+          startDate: addMonths(-1),
+          endDate: addMonths(0),
           pageSize: reportsStore.transactionPageSize,
         }}
         onSubmit={(values, { resetForm }) =>
@@ -47,9 +54,9 @@ export default observer(function FilterTransactionForm({
       >
         {({ isSubmitting }) => (
           <Form>
-            <div className="filter-form-container">
+            <div className="row">
               {!isOnlyDeposit && (
-                <div>
+                <div className="col-md-3">
                   <CustomSelect
                     name="type"
                     label="Enter transaction type"
@@ -65,25 +72,23 @@ export default observer(function FilterTransactionForm({
                   />
                 </div>
               )}
-              <div>
-                <CustomTextInput
+              <div className="col-md-3">
+                <CustomDatePicker
                   name="startDate"
                   label="Start Date"
-                  type="datetime-local"
                   placeholder="Enter start date"
                   required
                 />
               </div>
-              <div>
-                <CustomTextInput
+              <div className="col-md-3">
+                <CustomDatePicker
                   name="endDate"
                   label="End Date"
-                  type="datetime-local"
                   placeholder="Enter end date"
                   required
                 />
               </div>
-              <div>
+              <div className="col-md-3">
                 <CustomTextInput
                   name="transactionId"
                   label="Transaction Id"

@@ -69,7 +69,7 @@ export default observer(function FilterOtpsContent() {
               {el.isVerified ? (
                 <Icon name="checkmark box" className="text-success" />
               ) : (
-                <Icon name="times circle" className="text-secondary" />
+                <Icon name="times circle" className="text-danger" />
               )}
             </td>
           </tr>

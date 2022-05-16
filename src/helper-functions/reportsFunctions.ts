@@ -71,6 +71,31 @@ export function refinePaymentHistoryForDownload(data: TransactionReport[]) {
       Date: DateOnlyFormat(el.createdUTC),
       Amount: el.amount,
       "Transaction id": el.id,
+      Status: paymentStatus(el.status),
     };
   });
+}
+
+export function paymentStatus(statusCode: number) {
+  switch (statusCode) {
+    case 5:
+      return "Pending";
+    case 10:
+      return "Successful";
+    case 15:
+      return "Funds don't match";
+    case 20:
+      return "Failed";
+  }
+}
+
+export function paymentStatusClass(statusCode: number) {
+  switch (statusCode) {
+    case 10:
+      return "text-success";
+    case 20:
+      return "text-danger";
+    default:
+      return "text-secondary";
+  }
 }

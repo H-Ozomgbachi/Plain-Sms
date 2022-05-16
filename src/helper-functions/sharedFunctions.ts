@@ -36,8 +36,10 @@ export function getNumberOfPages(totalRecords: number, pageSize: number) {
   return Math.ceil(totalRecords / pageSize);
 }
 
-export function toUTCConverter(dateObject: Date | string) {
-  return new Date(new Date(dateObject).toUTCString()).toISOString();
+export function toUTCConverter(dateObject: Date | string | null) {
+  if (dateObject)
+    return new Date(new Date(dateObject).toUTCString()).toISOString();
+  else return new Date(new Date().toUTCString()).toISOString();
 }
 
 export const NairaFormatter = (value: number) => {
@@ -48,3 +50,6 @@ export const NairaFormatter = (value: number) => {
 
   return result.replace("NGN", "₦");
 };
+
+export const addMonths = (numberOfMonths: number) =>
+  moment().add(numberOfMonths, "months").toDate();
