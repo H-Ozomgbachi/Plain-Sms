@@ -42,7 +42,6 @@ export default observer(function Register() {
               lastName: Yup.string().required("This field is required"),
               email: Yup.string().email().required("This field is required"),
               password: Yup.string().required(),
-              countryCode: Yup.string().required("This field is required"),
               phone: Yup.string().required("This field is required"),
             })}
           >
@@ -90,6 +89,7 @@ export default observer(function Register() {
                     label="Code"
                     children={
                       <>
+                        <option value=""></option>
                         {CountryCodeOptions.map((el) => {
                           return (
                             <option value={el.value} key={el.value}>
@@ -99,6 +99,7 @@ export default observer(function Register() {
                         })}
                       </>
                     }
+                    required
                   />
                   <div className="flex-grow-1">
                     <CustomTextInput
