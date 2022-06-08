@@ -127,7 +127,8 @@ export class CommonStore {
       this.onreloadPath !== null &&
       this.onreloadPath !== "/account/login" &&
       this.onreloadPath !== "/account/forgot-password" &&
-      this.onreloadPath !== "/account/register"
+      this.onreloadPath !== "/account/register" &&
+      this.onreloadPath !== "/account/reset-password"
     ) {
       linkToDirect = this.onreloadPath;
     } else {

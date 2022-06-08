@@ -118,7 +118,9 @@ export class UserAccountStore {
   resetPassword = async (values: ResetPasswordDTO) => {
     try {
       store.commonStore.setLoading(true);
-      await agent.UserAccount.resetPassword(values);
+      const { result } = await agent.UserAccount.resetPassword(values);
+      store.commonStore.setSuccess(result.message);
+      customHistory.push("/account/login");
     } catch (error) {
       throw error;
     } finally {

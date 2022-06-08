@@ -25,6 +25,10 @@ export default observer(function App() {
   const { commonStore, userAccountStore } = useStore();
 
   useEffect(() => {
+    if (window.location.pathname === "/account/reset-password") {
+      commonStore.token = null;
+    }
+
     if (commonStore.token && commonStore.id) {
       userAccountStore.myAccount(commonStore.id);
     }

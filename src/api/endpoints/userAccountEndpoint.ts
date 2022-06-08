@@ -35,7 +35,10 @@ export const UserAccount = {
     ),
 
   resetPassword: (payload: ResetPasswordDTO) =>
-    requests.post("/account/reset-password", payload),
+    requests.post<ApiResponseData<DefaultData>>(
+      "/account/reset-password",
+      payload
+    ),
 
   getConfiguration: (id: string) =>
     requests.get<ApiResponseData<ConfigurationData>>(
